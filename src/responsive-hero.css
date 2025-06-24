@@ -1,0 +1,197 @@
+/* ===================================
+   RESPONSIVE HERO ELEMENTS STYLING
+   ================================== */
+
+/* Deploy Message Text - Fully Responsive Scaling */
+.deploy-message-text {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Courier New', monospace;
+  font-size: clamp(0.8rem, 1.8vw, 1.3rem);
+  font-weight: 600;
+  color: #ff7f50;
+  
+  /* Clean subtle glow that scales with size */
+  text-shadow: 
+    0 0 clamp(5px, 1vw, 12px) rgba(255, 127, 80, 0.5),
+    0 0 clamp(10px, 2vw, 25px) rgba(255, 127, 80, 0.3);
+  
+  /* Responsive width and line height */
+  max-width: clamp(200px, 28vw, 350px);
+  line-height: clamp(1.2, 1.4, 1.5);
+  
+  /* Responsive scaling */
+  transform: scale(clamp(0.8, 1vw, 1));
+  transform-origin: top left;
+  transition: all 0.3s ease;
+  
+  z-index: 20;
+}
+
+/* Timer Container - Fully Responsive Scaling */
+.timer-container {
+  width: clamp(200px, 22vw, 350px);
+  
+  /* Responsive scaling that adapts to viewport */
+  transform: scale(clamp(0.5, 1.2vw, 1));
+  transform-origin: top right;
+  
+  /* Ensure content scales smoothly */
+  transition: all 0.3s ease;
+}
+
+.timer-content {
+  /* Timer content scales with container */
+  width: 100%;
+  font-size: clamp(0.75rem, 1.5vw, 1.2rem);
+}
+
+/* CTA Container - Fully Responsive Scaling */
+.cta-container {
+  width: clamp(250px, 25vw, 400px);
+  min-height: clamp(120px, 15vh, 220px);
+  
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 127, 80, 0.4);
+  border-radius: clamp(6px, 1vw, 12px);
+  padding: clamp(0.75rem, 1.5vw, 1.5rem);
+  
+  /* Smooth transitions for responsive changes */
+  transition: all 0.3s ease;
+  transform: scale(clamp(0.8, 1vw, 1));
+  transform-origin: bottom left;
+}
+
+.cta-container:hover {
+  border-color: rgba(255, 127, 80, 0.6);
+  background: rgba(0, 0, 0, 0.95);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(255, 127, 80, 0.2);
+}
+
+/* ===================================
+   RESPONSIVE BREAKPOINTS
+   ================================== */
+
+/* Tablet and smaller desktop */
+@media (max-width: 1024px) {
+  .deploy-message-text {
+    transform: scale(clamp(0.7, 0.9vw, 0.95));
+  }
+  
+  .timer-container {
+    transform: scale(clamp(0.4, 1vw, 0.8));
+  }
+  
+  .cta-container {
+    transform: scale(clamp(0.75, 0.9vw, 0.95));
+  }
+}
+
+/* Tablet portrait */
+@media (max-width: 768px) {
+  .deploy-message-text {
+    transform: scale(clamp(0.6, 0.8vw, 0.85));
+  }
+  
+  .timer-container {
+    transform: scale(clamp(0.35, 0.8vw, 0.7));
+  }
+  
+  .cta-container {
+    transform: scale(clamp(0.65, 0.8vw, 0.85));
+  }
+}
+
+/* Mobile landscape */
+@media (max-width: 640px) {
+  .deploy-message-text {
+    transform: scale(clamp(0.5, 0.7vw, 0.75));
+  }
+  
+  .timer-container {
+    transform: scale(clamp(0.3, 0.6vw, 0.6));
+  }
+  
+  .cta-container {
+    transform: scale(clamp(0.55, 0.7vw, 0.75));
+  }
+}
+
+/* Mobile portrait */
+@media (max-width: 480px) {
+  .deploy-message-text {
+    transform: scale(clamp(0.45, 0.6vw, 0.65));
+  }
+  
+  .timer-container {
+    transform: scale(clamp(0.25, 0.5vw, 0.5));
+  }
+  
+  .cta-container {
+    transform: scale(clamp(0.45, 0.6vw, 0.65));
+  }
+}
+
+/* Ultra-small screens */
+@media (max-width: 360px) {
+  .deploy-message-text {
+    font-size: clamp(0.65rem, 1.4vw, 0.8rem);
+    max-width: clamp(180px, 60vw, 220px);
+    
+    /* Reduce outline intensity on very small screens */
+    text-shadow: 
+      -1px -1px 0 #ff0000,
+      1px -1px 0 #ff0000,
+      -1px 1px 0 #ff0000,
+      1px 1px 0 #ff0000;
+  }
+  
+  .timer-container {
+    width: clamp(180px, 55vw, 200px);
+    transform: scale(clamp(0.3, 0.5vw, 0.5));
+  }
+  
+  .cta-container {
+    width: clamp(220px, 60vw, 250px);
+    min-height: clamp(90px, 14vh, 140px);
+    padding: clamp(0.625rem, 1.2vw, 0.875rem);
+  }
+}
+
+/* ===================================
+   POSITION SAFETY ZONES
+   ================================== */
+
+/* Ensure elements never overlap central image content */
+@media (max-height: 600px) {
+  /* Adjust positioning for short screens */
+  .deploy-message-text {
+    top: clamp(100px, 12vh, 140px) !important;
+  }
+  
+  .timer-container {
+    top: clamp(100px, 12vh, 140px) !important;
+  }
+  
+  .cta-container {
+    bottom: clamp(1rem, 6vh, 2rem) !important;
+  }
+}
+
+/* Ultra-wide screens - prevent elements from being too far apart */
+@media (min-width: 1920px) {
+  .deploy-message-text {
+    left: clamp(3rem, 6vw, 8rem) !important;
+    max-width: clamp(400px, 25vw, 600px);
+  }
+  
+  .timer-container {
+    right: clamp(3rem, 6vw, 8rem) !important;
+    width: clamp(350px, 25vw, 500px);
+  }
+  
+  .cta-container {
+    left: clamp(3rem, 6vw, 8rem) !important;
+    width: clamp(450px, 30vw, 650px);
+  }
+}
