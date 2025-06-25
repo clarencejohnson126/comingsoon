@@ -197,35 +197,33 @@ function App() {
 
       {/* Full Screen Hero Section with Background Image */}
       <section className="relative overflow-hidden" style={{marginTop: '2.5rem', minHeight: 'calc(100vh - 2.5rem)'}}>
-        {/* Full Screen Background Image Container - Maintains aspect ratio */}
+        {/* Full Screen Background Image Container */}
         <div className="absolute top-0 left-0 right-0 bottom-0 w-full h-full">
-          <div className="relative w-full h-full max-w-none">
-            <img
-              src="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//ChatGPT%20Image%20Jun%2022,%202025,%2009_57_27%20PM.png"
-              alt="Rebelz AI Hero"
-              className="w-full h-full object-cover opacity-95 brightness-110"
-            />
-            {/* Subtle overlay to ensure text readability */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30"></div>
-            
-            {/* Monitor Screen - Terminal Output (positioned relative to image) */}
-            <div className="absolute" style={{
-              top: '58%',
-              left: '41%',
-              width: '12%',
-              transform: 'translate(-50%, -50%)',
-              zIndex: 20
+          <img
+            src="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//ChatGPT%20Image%20Jun%2022,%202025,%2009_57_27%20PM.png"
+            alt="Rebelz AI Hero"
+            className="w-full h-full object-cover opacity-95 brightness-110"
+          />
+          {/* Subtle overlay to ensure text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30"></div>
+          
+          {/* Monitor Screen - Terminal Output (positioned relative to image) */}
+          <div className="absolute" style={{
+            top: '58%',
+            left: '41%',
+            width: '12%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 20
+          }}>
+            <div style={{
+              color: '#36ff36',
+              fontFamily: "'Fira Mono', 'Courier New', monospace",
+              fontSize: '0.7rem',
+              lineHeight: '1.2',
+              letterSpacing: '0.05em'
             }}>
-              <div style={{
-                color: '#36ff36',
-                fontFamily: "'Fira Mono', 'Courier New', monospace",
-                fontSize: '0.7rem',
-                lineHeight: '1.2',
-                letterSpacing: '0.05em'
-              }}>
-                {typewriterText}
-                <span className="animate-pulse" style={{color: '#36ff36'}}>|</span>
-              </div>
+              {typewriterText}
+              <span className="animate-pulse" style={{color: '#36ff36'}}>|</span>
             </div>
           </div>
         </div>
@@ -233,42 +231,22 @@ function App() {
         {/* Fixed UI Elements - Outside image container */}
         <div className="relative z-10" style={{minHeight: 'calc(100vh - 2.5rem)'}}>
           
-          {/* Top Right - Spotify Player (fixed to viewport) */}
-          <div className="fixed top-16 right-4 w-64 z-30">
-            <div className="bg-black/90 backdrop-blur-md rounded-lg p-2 border border-orange-500/30">
-              <iframe 
-                style={{borderRadius: '12px'}} 
-                src="https://open.spotify.com/embed/track/2ufpTLLgG1Q1etucp78w5m?utm_source=generator" 
-                width="100%" 
-                height="120" 
-                frameBorder="0" 
-                allowFullScreen 
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                loading="lazy"
-              />
-            </div>
-          </div>
-
-          {/* Top Right - Countdown Timer (fixed to viewport) */}
-          <div className="fixed top-48 right-4 z-20">
-            <div className="bg-black/80 backdrop-blur-md rounded-lg p-3 border border-orange-500/30">
-              <div className="transform scale-85 origin-center">
-                <CountdownTimer />
-              </div>
-            </div>
+          {/* Top Right - Countdown Timer (fixed and properly sized) */}
+          <div className="fixed top-16 right-4 z-20">
+            <CountdownTimer />
           </div>
 
           {/* Bottom Left - Blacklist Button (fixed positioning) */}
           <div className="fixed bottom-8 left-8 w-96 z-20">
             <div className="bg-black/90 backdrop-blur-md rounded-lg p-6 border border-orange-500/30 space-y-4">
               {!showEmailInput ? (
-                                                    <button 
-                    onClick={handleJoinBlacklist}
-                    className="group w-full px-6 py-4 bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg font-bold text-lg hover:from-orange-600 hover:to-orange-700 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 pulse-orange border-2 border-orange-400 hover-glow"
-                  >
-                    <Lock className="w-6 h-6" />
-                    Get Blacklisted
-                    <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
+                <button 
+                  onClick={handleJoinBlacklist}
+                  className="group w-full px-6 py-4 bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg font-bold text-lg hover:from-orange-600 hover:to-orange-700 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 pulse-orange border-2 border-orange-400 hover-glow"
+                >
+                  <Lock className="w-6 h-6" />
+                  Get Blacklisted
+                  <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
                 </button>
               ) : (
                 <form onSubmit={handleEmailSubmit} className="space-y-3">
