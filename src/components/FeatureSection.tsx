@@ -19,7 +19,7 @@ const FeatureSection: React.FC = () => {
     {
       icon: <Globe className="w-8 h-8" />,
       title: "Global Underground",
-      description: "Ship worldwide to our distributed network of rebels and creators.",
+      description: "Ship worldwide to our distributed network of rebelz and creators.",
       code: "deploy.globally()"
     },
     {

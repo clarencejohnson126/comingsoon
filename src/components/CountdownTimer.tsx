@@ -36,7 +36,7 @@ const CountdownTimer: React.FC = () => {
 
   return (
     <div className="bg-black/90 backdrop-blur-md rounded-lg p-3 border border-orange-500/30 w-80">
-      <h3 className="text-orange-500 font-bold text-sm mb-2 text-center">Blacklist closes in:</h3>
+      <h3 className="text-orange-500 font-bold text-sm mb-2 text-center">First Apparel Drop in:</h3>
       <div className="grid grid-cols-4 gap-2">
         {Object.entries(timeLeft).map(([unit, value]) => (
           <div key={unit} className="text-center">

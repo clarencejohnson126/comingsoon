@@ -28,7 +28,7 @@ const FAQ: React.FC = () => {
     },
     {
       question: "Do you ship internationally?",
-      answer: "Yes! We ship to our global network of rebels in over 50 countries. Shipping is carbon-neutral and tracked via our custom logistics algorithm."
+      answer: "Yes! We ship to our global network of rebelz in over 50 countries. Shipping is carbon-neutral and tracked via our custom logistics algorithm."
     }
   ];
 

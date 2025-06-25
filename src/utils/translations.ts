@@ -35,7 +35,7 @@ export interface Translations {
 export const translations: Record<Language, Translations> = {
   en: {
     header: {
-      slogan1: 'Outfit your MindStack',
+      slogan1: 'Rep your TechStack',
       slogan2: 'The only Brand merging Code & Cloth.',
       waitlist: 'Waitlist',
       contact: 'Contact'
@@ -66,7 +66,7 @@ export const translations: Record<Language, Translations> = {
   },
   de: {
     header: {
-      slogan1: 'Rüste deinen MindStack aus',
+      slogan1: 'Rep deinen TechStack',
       slogan2: 'Die einzige Marke, die Code & Kleidung vereint.',
       waitlist: 'Warteliste',
       contact: 'Kontakt'

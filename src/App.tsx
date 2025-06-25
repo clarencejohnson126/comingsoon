@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Users, Zap, Eye, ArrowRight, Code, Crown, Lock, Star, Cpu, Shield, Coffee, Mail } from 'lucide-react';
 import MatrixRain from './components/MatrixRain';
 import CountdownTimer from './components/CountdownTimer';
-import StickyBar from './components/StickyBar';
+import ContactForm from './components/ContactForm';
 
 import ProductPreview from './components/ProductPreview';
 import FeatureSection from './components/FeatureSection';
@@ -21,6 +21,7 @@ function App() {
   const [message, setMessage] = useState('');
   const [showEmailInput, setShowEmailInput] = useState(false);
   const [currentLanguage, setCurrentLanguage] = useState<Language>('en');
+  const [showContactForm, setShowContactForm] = useState(false);
   
   const t = useTranslation(currentLanguage);
   const fullText = t.hero.typewriterText;
@@ -194,24 +195,29 @@ function App() {
     setMessage('');
   };
 
+  const handleContactClick = () => {
+    setShowContactForm(true);
+  };
+
+  const handleCloseContactForm = () => {
+    setShowContactForm(false);
+  };
+
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
       {/* Header Bar with Logo and Slogan - Compact */}
       <div className="fixed top-0 left-0 right-0 z-[100] bg-black/95 backdrop-blur-md border-b border-orange-500/50 shadow-lg">
         <div className="flex items-center justify-between px-3 py-1.5">
-          {/* Logo on left - Much smaller */}
+          {/* Logo on left - Text only */}
           <div className="flex items-center flex-shrink-0">
-            <img
-              src="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/images/clarencejohnson_hotmail_de/ChatGPT%20Image%20Jun%2022,%202025,%2002_06_45%20PM.png"
-              alt="REBELZ AI Logo"
-              className="w-20 h-auto sm:w-24 drop-shadow-xl"
-              style={{filter: 'brightness(1.1) contrast(1.1)'}}
-            />
+            <span className="text-lg sm:text-xl font-bold shimmer-orange">
+              REBELZ AI
+            </span>
           </div>
           
           {/* MAIN SLOGAN - Compact */}
           <div className="flex-1 text-center px-2">
-            <h1 className="text-sm sm:text-base md:text-lg font-bold shimmer-orange">
+            <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold shimmer-orange">
               {t.header.slogan1}
             </h1>
             <h2 className="text-xs sm:text-sm font-bold shimmer-orange">
@@ -228,11 +234,19 @@ function App() {
             <button className="text-orange-400 hover:text-orange-300 font-mono text-xs sm:text-sm font-bold transition-all duration-300 hover:scale-105 px-2 py-0.5 rounded border border-transparent hover:border-orange-500/30">
               {t.header.waitlist}
             </button>
-            <button className="text-orange-400 hover:text-orange-300 font-mono text-xs sm:text-sm font-bold transition-all duration-300 hover:scale-105 px-2 py-0.5 rounded border border-transparent hover:border-orange-500/30">
+            <button 
+              onClick={handleContactClick}
+              className="text-orange-400 hover:text-orange-300 font-mono text-xs sm:text-sm font-bold transition-all duration-300 hover:scale-105 px-2 py-0.5 rounded border border-transparent hover:border-orange-500/30"
+            >
               {t.header.contact}
             </button>
           </div>
         </div>
+      </div>
+
+      {/* Countdown Timer - Under header bar, upper middle right */}
+      <div className="fixed top-16 right-4 z-[90]">
+        <CountdownTimer />
       </div>
 
       {/* Full Screen Hero Section with Background Image */}
@@ -275,14 +289,7 @@ function App() {
           transition: 'transform 0.2s ease-out'
         }}>
 
-          {/* Top Right - Countdown Timer */}
-          <div className="absolute" style={{
-            top: '10%',
-            right: '2%',
-            zIndex: 20
-          }}>
-            <CountdownTimer />
-          </div>
+
 
           {/* Bottom Left - Blacklist Button */}
           <div className="absolute" style={{
@@ -442,7 +449,76 @@ function App() {
         </div>
       </section>
 
-      <StickyBar onJoinClick={handleJoinBlacklist} />
+      {/* Fixed Spotify Player - Bottom Right */}
+      <div className="fixed bottom-4 right-4 z-[90] hidden lg:block">
+        <div className="bg-black/90 backdrop-blur-md rounded-2xl p-3 border border-orange-500/30 shadow-2xl">
+          <div className="mb-2 text-center">
+            <h3 className="text-orange-400 font-mono text-xs font-bold">
+              Late Night Stack Player
+            </h3>
+          </div>
+          <iframe 
+            style={{borderRadius: '8px'}} 
+            src="https://open.spotify.com/embed/track/2ufpTLLgG1Q1etucp78w5m?utm_source=generator" 
+            width="240" 
+            height="152" 
+            frameBorder="0" 
+            allowFullScreen={true}
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="bg-black border-t border-orange-500/30 py-8">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="flex items-center gap-4">
+              <img
+                src="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/images/clarencejohnson_hotmail_de/ChatGPT%20Image%20Jun%2022,%202025,%2002_06_45%20PM.png"
+                alt="REBELZ AI Logo"
+                className="w-16 h-auto"
+                style={{filter: 'brightness(1.1) contrast(1.1)'}}
+              />
+              <div>
+                <p className="text-orange-500 font-bold text-lg shimmer-orange">REBELZ AI</p>
+                <p className="text-gray-400 text-sm font-mono">Rep your TechStack</p>
+              </div>
+            </div>
+            
+            <div className="flex flex-wrap justify-center gap-6 text-sm">
+              <a href="/privacy" className="text-gray-400 hover:text-orange-400 transition-colors font-mono">
+                Privacy Policy
+              </a>
+              <a href="/terms" className="text-gray-400 hover:text-orange-400 transition-colors font-mono">
+                Terms of Service
+              </a>
+              <a href="/cookies" className="text-gray-400 hover:text-orange-400 transition-colors font-mono">
+                Cookie Policy
+              </a>
+              <a href="/disclaimer" className="text-gray-400 hover:text-orange-400 transition-colors font-mono">
+                Disclaimer
+              </a>
+            </div>
+            
+            <div className="text-center md:text-right">
+              <p className="text-gray-400 text-sm font-mono">
+                © 2025 Rebelz AI. All rights reserved.
+              </p>
+              <p className="text-gray-500 text-xs font-mono mt-1">
+                Built with 💻 and ☕ by rebelz
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      {/* Contact Form Modal */}
+      <ContactForm 
+        isOpen={showContactForm} 
+        onClose={handleCloseContactForm} 
+      />
     </div>
   );
 }
