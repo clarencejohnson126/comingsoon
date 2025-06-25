@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Users, Zap, Vote, Eye, ArrowRight, Code, Shirt, Crown, Lock, Star, Cpu, Shield, Coffee, Terminal, Mail } from 'lucide-react';
+import { Users, Zap, Eye, ArrowRight, Code, Crown, Lock, Star, Cpu, Shield, Coffee, Mail } from 'lucide-react';
 import MatrixRain from './components/MatrixRain';
 import CountdownTimer from './components/CountdownTimer';
 import StickyBar from './components/StickyBar';
-import AvatarCarousel from './components/AvatarCarousel';
+
 import ProductPreview from './components/ProductPreview';
 import FeatureSection from './components/FeatureSection';
 import TestimonialSection from './components/TestimonialSection';
@@ -387,36 +387,7 @@ function App() {
       {/* Features Section - WITH MATRIX RAIN */}
       <FeatureSection />
 
-      {/* Community Proof - WITH MATRIX RAIN */}
-      <section className="relative py-20 bg-gradient-to-b from-black to-gray-900">
-        <MatrixRain intensity="subtle" className="opacity-40" />
-        <div className="relative z-10 max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl md:text-6xl font-bold text-center mb-12 shimmer-orange">
-            Join the Rebelz AI Underground
-          </h2>
-          <AvatarCarousel />
-          
-          <div className="grid md:grid-cols-3 gap-8 mt-16">
-            <div className="bg-black/50 backdrop-blur-md rounded-2xl p-8 border border-orange-500/30 hover-glow">
-              <Terminal className="w-12 h-12 text-orange-500 mb-4" />
-              <h3 className="text-2xl font-bold mb-4 shimmer-orange">Early-bird Access</h3>
-              <p className="text-gray-300 font-mono">Get first dibs on limited Rebelz AI drops before anyone else knows they exist.</p>
-            </div>
-            
-            <div className="bg-black/50 backdrop-blur-md rounded-2xl p-8 border border-orange-500/30 hover-glow">
-              <Shirt className="w-12 h-12 text-orange-500 mb-4" />
-              <h3 className="text-2xl font-bold mb-4 shimmer-orange">Exclusive Colorways</h3>
-              <p className="text-gray-300 font-mono">Blacklist-only designs that aren't available to the general public.</p>
-            </div>
-            
-            <div className="bg-black/50 backdrop-blur-md rounded-2xl p-8 border border-orange-500/30 hover-glow">
-              <Vote className="w-12 h-12 text-orange-500 mb-4" />
-              <h3 className="text-2xl font-bold mb-4 shimmer-orange">Vote on Drops</h3>
-              <p className="text-gray-300 font-mono">Help decide the next Rebelz AI designs. Your code, your choice, your influence.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* Testimonials - WITH MATRIX RAIN */}
       <TestimonialSection />
