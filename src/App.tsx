@@ -20,19 +20,36 @@ function App() {
   const [showEmailInput, setShowEmailInput] = useState(false);
   const fullText = "Deploy Yourself. Don't Obey. Join the Movement.";
 
-  // Typewriter effect
+  // Typewriter effect with continuous loop
   useEffect(() => {
     let index = 0;
-    const timer = setInterval(() => {
-      if (index < fullText.length) {
-        setTypewriterText(fullText.substring(0, index + 1));
-        index++;
-      } else {
-        clearInterval(timer);
-      }
-    }, 100);
+    let timer: NodeJS.Timeout;
+    let restartTimer: NodeJS.Timeout;
 
-    return () => clearInterval(timer);
+    const startTyping = () => {
+      index = 0;
+      setTypewriterText('');
+      
+      timer = setInterval(() => {
+        if (index < fullText.length) {
+          setTypewriterText(fullText.substring(0, index + 1));
+          index++;
+        } else {
+          clearInterval(timer);
+          // Wait 3 seconds then restart
+          restartTimer = setTimeout(() => {
+            startTyping();
+          }, 3000);
+        }
+      }, 100);
+    };
+
+    startTyping();
+
+    return () => {
+      clearInterval(timer);
+      clearTimeout(restartTimer);
+    };
   }, []);
 
   // Load real blacklist count from Supabase
@@ -143,35 +160,35 @@ function App() {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
-      {/* Header Bar with Logo and Slogan - Most Important */}
-      <div className="fixed top-0 left-0 right-0 z-[100] bg-black/95 backdrop-blur-md border-b-2 border-orange-500/50 shadow-lg">
-        <div className="flex items-center justify-between px-4 sm:px-6 py-3">
-          {/* Logo on left */}
+      {/* Header Bar with Logo and Slogan - Compact */}
+      <div className="fixed top-0 left-0 right-0 z-[100] bg-black/95 backdrop-blur-md border-b border-orange-500/50 shadow-lg">
+        <div className="flex items-center justify-between px-3 py-1.5">
+          {/* Logo on left - Much smaller */}
           <div className="flex items-center flex-shrink-0">
             <img
               src="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/images/clarencejohnson_hotmail_de/ChatGPT%20Image%20Jun%2022,%202025,%2002_06_45%20PM.png"
               alt="REBELZ AI Logo"
-              className="w-32 h-auto sm:w-40 md:w-48 drop-shadow-xl"
+              className="w-20 h-auto sm:w-24 drop-shadow-xl"
               style={{filter: 'brightness(1.1) contrast(1.1)'}}
             />
           </div>
           
-          {/* MAIN SLOGAN - Most Important Text */}
-          <div className="flex-1 text-center px-4">
-            <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold shimmer-orange">
+          {/* MAIN SLOGAN - Compact */}
+          <div className="flex-1 text-center px-2">
+            <h1 className="text-sm sm:text-base md:text-lg font-bold shimmer-orange">
               Outfit your MindStack
             </h1>
-            <h2 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold shimmer-orange">
+            <h2 className="text-xs sm:text-sm font-bold shimmer-orange">
               The only Brand merging Code & Cloth.
             </h2>
           </div>
           
-          {/* Menu items on right */}
-          <div className="flex items-center gap-4 sm:gap-6 flex-shrink-0">
-            <button className="text-orange-400 hover:text-orange-300 font-mono text-sm sm:text-base font-bold transition-all duration-300 hover:scale-105 px-3 py-1 rounded border border-transparent hover:border-orange-500/30">
+          {/* Menu items on right - Compact */}
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+            <button className="text-orange-400 hover:text-orange-300 font-mono text-xs sm:text-sm font-bold transition-all duration-300 hover:scale-105 px-2 py-0.5 rounded border border-transparent hover:border-orange-500/30">
               Waitlist
             </button>
-            <button className="text-orange-400 hover:text-orange-300 font-mono text-sm sm:text-base font-bold transition-all duration-300 hover:scale-105 px-3 py-1 rounded border border-transparent hover:border-orange-500/30">
+            <button className="text-orange-400 hover:text-orange-300 font-mono text-xs sm:text-sm font-bold transition-all duration-300 hover:scale-105 px-2 py-0.5 rounded border border-transparent hover:border-orange-500/30">
               Contact
             </button>
           </div>
@@ -179,7 +196,7 @@ function App() {
       </div>
 
       {/* Full Screen Hero Section with Background Image */}
-      <section className="relative overflow-hidden" style={{marginTop: '5rem', minHeight: 'calc(100vh - 5rem)'}}>
+      <section className="relative overflow-hidden" style={{marginTop: '2.5rem', minHeight: 'calc(100vh - 2.5rem)'}}>
         {/* Full Screen Background Image - Positioned below header */}
         <div className="absolute top-0 left-0 right-0 bottom-0 w-full h-full">
           <img
@@ -192,38 +209,95 @@ function App() {
         </div>
 
         {/* Overlay Content - Fixed positioned elements that don't move */}
-        <div className="relative z-10" style={{minHeight: 'calc(100vh - 5rem)'}}>
+        <div className="relative z-10" style={{minHeight: 'calc(100vh - 2.5rem)'}}>
           
-          {/* Top Left - Deploy Message (Fixed position and size) */}
-          <div className="absolute top-8 left-8 w-80 z-20">
-            <div className="bg-black/80 backdrop-blur-md rounded-lg p-6 border border-orange-500/30">
-              <p className="text-orange-300 font-mono text-base leading-relaxed">
-                {typewriterText}
-                <span className="animate-pulse text-orange-500">|</span>
-              </p>
+          {/* Monitor Screen - Terminal Output (responsive positioning) */}
+          <div style={{
+            position: 'absolute',
+            top: '48vh',
+            left: '33vw',
+            width: '16vw',
+            zIndex: 20
+          }}>
+            <div style={{
+              position: 'relative',
+              top: '1vh',
+              left: '1vw',
+              color: '#36ff36',
+              fontFamily: "'Fira Mono', 'Courier New', monospace",
+              fontSize: 'clamp(0.5rem, 0.8vw, 1rem)',
+              lineHeight: '1.4',
+              letterSpacing: '0.05em'
+            }}>
+              {typewriterText}
+              <span className="animate-pulse" style={{color: '#36ff36'}}>|</span>
             </div>
           </div>
 
-          {/* Top Right - Countdown Timer (Fixed position and size) */}
-          <div className="absolute top-8 right-8 z-20">
-            <div className="bg-black/80 backdrop-blur-md rounded-lg p-4 border border-orange-500/30">
-              <div className="transform scale-100 origin-center">
+          {/* Top Right - Spotify Player (responsive sizing) */}
+          <div style={{
+            position: 'fixed',
+            top: '8vh',
+            right: '2vw',
+            width: 'clamp(250px, 18vw, 320px)',
+            zIndex: 30
+          }}>
+            <div className="bg-black/90 backdrop-blur-md rounded-lg p-2 border border-orange-500/30">
+              <iframe 
+                style={{borderRadius: '12px'}} 
+                src="https://open.spotify.com/embed/track/2ufpTLLgG1Q1etucp78w5m?utm_source=generator" 
+                width="100%" 
+                height="clamp(100px, 8vh, 140px)" 
+                frameBorder="0" 
+                allowFullScreen 
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          {/* Top Right - Countdown Timer (responsive positioning) */}
+          <div style={{
+            position: 'absolute',
+            top: 'clamp(200px, 25vh, 300px)',
+            right: '2vw',
+            zIndex: 20
+          }}>
+            <div className="bg-black/80 backdrop-blur-md rounded-lg border border-orange-500/30" style={{
+              padding: 'clamp(0.5rem, 1vw, 1rem)'
+            }}>
+              <div style={{
+                transform: 'scale(clamp(0.7, 0.8, 1))',
+                transformOrigin: 'center'
+              }}>
                 <CountdownTimer />
               </div>
             </div>
           </div>
 
-          {/* Bottom Left - Blacklist Button (Fixed position and size) */}
-          <div className="fixed bottom-8 left-8 w-96 z-20">
-            <div className="bg-black/90 backdrop-blur-md rounded-lg p-6 border border-orange-500/30 space-y-4">
+          {/* Bottom Left - Blacklist Button (responsive positioning) */}
+          <div style={{
+            position: 'fixed',
+            bottom: 'clamp(1rem, 4vh, 3rem)',
+            left: 'clamp(1rem, 3vw, 2rem)',
+            width: 'clamp(280px, 20vw, 400px)',
+            zIndex: 20
+          }}>
+            <div className="bg-black/90 backdrop-blur-md rounded-lg border border-orange-500/30 space-y-4" style={{
+              padding: 'clamp(1rem, 2vw, 1.5rem)'
+            }}>
               {!showEmailInput ? (
-                <button 
-                  onClick={handleJoinBlacklist}
-                  className="group w-full px-6 py-4 bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg font-bold text-lg hover:from-orange-600 hover:to-orange-700 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 pulse-orange border-2 border-orange-400 hover-glow"
-                >
-                  <Lock className="w-6 h-6" />
-                  Get Blacklisted
-                  <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
+                                  <button 
+                    onClick={handleJoinBlacklist}
+                    className="group w-full bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg font-bold hover:from-orange-600 hover:to-orange-700 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 pulse-orange border-2 border-orange-400 hover-glow"
+                    style={{
+                      padding: 'clamp(0.8rem, 2vw, 1.2rem) clamp(1rem, 3vw, 1.5rem)',
+                      fontSize: 'clamp(0.9rem, 1.6vw, 1.1rem)'
+                    }}
+                  >
+                                      <Lock style={{width: 'clamp(1rem, 1.5vw, 1.5rem)', height: 'clamp(1rem, 1.5vw, 1.5rem)'}} />
+                    Get Blacklisted
+                    <ArrowRight style={{width: 'clamp(1rem, 1.5vw, 1.5rem)', height: 'clamp(1rem, 1.5vw, 1.5rem)'}} className="group-hover:translate-x-2 transition-transform" />
                 </button>
               ) : (
                 <form onSubmit={handleEmailSubmit} className="space-y-3">
@@ -280,17 +354,25 @@ function App() {
             </div>
           </div>
 
-          {/* Bottom Right - First Mover Stats (Fixed position and size) */}
-          <div className="fixed bottom-8 right-8 w-80 z-20">
-            <div className="bg-black/90 backdrop-blur-md rounded-lg p-6 border border-orange-500/50">
-              <p className="text-orange-400 font-mono text-sm mb-2">First movers get early access + exclusive drop.</p>
-              <p className="text-red-400 font-bold text-base glitch-text mb-3">Miss it, miss out.</p>
+          {/* Bottom Right - First Mover Stats (responsive positioning) */}
+          <div style={{
+            position: 'fixed',
+            bottom: 'clamp(1rem, 4vh, 3rem)',
+            right: 'clamp(1rem, 3vw, 2rem)',
+            width: 'clamp(250px, 18vw, 320px)',
+            zIndex: 20
+          }}>
+            <div className="bg-black/90 backdrop-blur-md rounded-lg border border-orange-500/50" style={{
+              padding: 'clamp(1rem, 2vw, 1.5rem)'
+            }}>
+              <p className="text-orange-400 font-mono mb-2" style={{fontSize: 'clamp(0.7rem, 1.2vw, 0.9rem)'}}>First movers get early access + exclusive drop.</p>
+              <p className="text-red-400 font-bold glitch-text mb-3" style={{fontSize: 'clamp(0.8rem, 1.4vw, 1rem)'}}>Miss it, miss out.</p>
               
               <div className="flex items-center gap-2 justify-center">
-                <Users className="w-5 h-5 text-orange-500" />
-                <span className="font-mono text-2xl shimmer-orange count-animation">{blacklistCount.toLocaleString()}</span>
+                <Users style={{width: 'clamp(1rem, 1.5vw, 1.25rem)', height: 'clamp(1rem, 1.5vw, 1.25rem)'}} className="text-orange-500" />
+                <span className="font-mono shimmer-orange count-animation" style={{fontSize: 'clamp(1.2rem, 2vw, 1.5rem)'}}>{blacklistCount.toLocaleString()}</span>
               </div>
-              <p className="text-orange-300 text-sm font-mono text-center mt-1">joined the Tribe</p>
+              <p className="text-orange-300 font-mono text-center mt-1" style={{fontSize: 'clamp(0.7rem, 1.2vw, 0.9rem)'}}>joined the Tribe</p>
             </div>
           </div>
 
