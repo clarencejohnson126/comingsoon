@@ -11,7 +11,7 @@ const FounderNote: React.FC = () => {
           <div className="flex flex-col md:flex-row items-center gap-8">
             <div className="flex-shrink-0">
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face"
+                src="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//out-2-1.png"
                 alt="Clarence - Founder"
                 className="w-32 h-32 rounded-full border-4 border-orange-500/50"
               />
