@@ -1,5 +1,5 @@
 import React from 'react';
-import { Zap, Shield, Users, Globe, Code, Cpu } from 'lucide-react';
+import { Users, Globe, Code, Star, Handshake, Crown } from 'lucide-react';
 import MatrixRain from './MatrixRain';
 
 const FeatureSection: React.FC = () => {
@@ -9,12 +9,6 @@ const FeatureSection: React.FC = () => {
       title: "Code-First Design",
       description: "Every piece tells a story in syntax. Wear your programming language with pride.",
       code: "style.apply(rebellion)"
-    },
-    {
-      icon: <Shield className="w-8 h-8" />,
-      title: "Blockchain Verified",
-      description: "Each item comes with NFT authenticity. No fakes, no compromises.",
-      code: "verify.authenticity()"
     },
     {
       icon: <Users className="w-8 h-8" />,
@@ -29,16 +23,22 @@ const FeatureSection: React.FC = () => {
       code: "deploy.globally()"
     },
     {
-      icon: <Zap className="w-8 h-8" />,
-      title: "Smart Wearables",
-      description: "IoT-enabled clothing that responds to your environment and mood.",
-      code: "fabric.connect()"
+      icon: <Star className="w-8 h-8" />,
+      title: "Early Access Program",
+      description: "Subscribers and early supporters get first dibs on new drops, exclusive access to unreleased designs, and private beta invites for new features.",
+      code: "access.early()"
     },
     {
-      icon: <Cpu className="w-8 h-8" />,
-      title: "AI-Generated",
-      description: "Patterns created by neural networks trained on thousands of designs.",
-      code: "ai.create.unique()"
+      icon: <Handshake className="w-8 h-8" />,
+      title: "Direct-to-Creator Collabs",
+      description: "We collaborate with underground devs, hackers, and artists. Own pieces made with creators from our global community—no gatekeepers.",
+      code: "collab.join()"
+    },
+    {
+      icon: <Crown className="w-8 h-8" />,
+      title: "Lifetime Discount for Founders",
+      description: "OG customers who support us early get a lifetime discount code. Thank you for believing before the hype train arrives.",
+      code: "reward.founder()"
     }
   ];
 

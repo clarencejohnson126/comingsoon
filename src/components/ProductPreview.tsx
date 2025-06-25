@@ -8,27 +8,19 @@ const ProductPreview: React.FC = () => {
   const products = [
     {
       id: 1,
-      name: "Neural Network Hoodie",
-      preview: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=600&fit=crop",
-      description: "Embedded circuits pattern with reactive fiber technology",
-      price: "0x47 ETH",
-      features: ["Smart Fabric", "Temperature Adaptive", "Limited Edition"]
+      name: "The Trifecta Hoodie",
+      preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//Hoodie%20front%20and%20back.png",
+      description: "Embedded Code inside sleeve for retrieving community perks",
+      price: "$/€/BTC/ETH/SOL/USDT",
+      features: ["French Terry Fabric", "GSM 350 brushed", "Embroided Label Tag at bottom back \"First Mover Collection\"", "Limited Edition"]
     },
     {
       id: 2,
-      name: "Binary Code Tee",
-      preview: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=600&fit=crop",
-      description: "Your personal algorithm printed in binary",
-      price: "0x23 ETH",
-      features: ["Custom Code", "Organic Cotton", "Glow-in-Dark"]
-    },
-    {
-      id: 3,
-      name: "Quantum Sneakers",
-      preview: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&h=600&fit=crop",
-      description: "Step into the future with quantum-inspired design",
-      price: "0x89 ETH",
-      features: ["LED Soles", "Anti-Gravity Foam", "Blockchain Auth"]
+      name: "Fitted and Automated Tee",
+      preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//ChatGPT%20Image%20Jun%2025,%202025,%2010_09_38%20PM.png",
+      description: "Obey nobody. Automate everything",
+      price: "$/€/BTC/ETH/SOL/USDT",
+      features: ["Custom Code", "Organic Cotton", "Embroided Label tag at bottom left front \"Verified Vibe Coder\""]
     }
   ];
 

@@ -9,7 +9,9 @@ import FeatureSection from './components/FeatureSection';
 import TestimonialSection from './components/TestimonialSection';
 import FounderNote from './components/FounderNote';
 import FAQ from './components/FAQ';
+import LanguageToggle from './components/LanguageToggle';
 import { supabaseHelpers, subscribeToBlacklistChanges } from './lib/supabase';
+import { Language, useTranslation } from './utils/translations';
 
 function App() {
   const [blacklistCount, setBlacklistCount] = useState(847);
@@ -18,7 +20,41 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [showEmailInput, setShowEmailInput] = useState(false);
-  const fullText = "Deploy Yourself. Don't Obey. Join the Movement.";
+  const [currentLanguage, setCurrentLanguage] = useState<Language>('en');
+  
+  const t = useTranslation(currentLanguage);
+  const fullText = t.hero.typewriterText;
+
+  // Responsive scaling for overlay elements
+  useEffect(() => {
+    const updateScale = () => {
+      const viewport = {
+        width: window.innerWidth,
+        height: window.innerHeight - 40 // Account for header height
+      };
+      
+      // Base design dimensions (what elements were designed for)
+      const baseWidth = 1920;
+      const baseHeight = 1080;
+      
+      // Calculate scale factor based on viewport size
+      const scaleX = viewport.width / baseWidth;
+      const scaleY = viewport.height / baseHeight;
+      
+      // Use the smaller scale factor to maintain aspect ratio
+      // Add bounds to prevent elements from being too small or too large
+      const scaleFactor = Math.max(0.4, Math.min(1.2, Math.min(scaleX, scaleY)));
+      
+      // Set CSS custom property for scaling
+      document.documentElement.style.setProperty('--scale-factor', scaleFactor.toString());
+    };
+
+    // Update on mount and resize
+    updateScale();
+    window.addEventListener('resize', updateScale);
+    
+    return () => window.removeEventListener('resize', updateScale);
+  }, []);
 
   // Typewriter effect with continuous loop
   useEffect(() => {
@@ -176,20 +212,24 @@ function App() {
           {/* MAIN SLOGAN - Compact */}
           <div className="flex-1 text-center px-2">
             <h1 className="text-sm sm:text-base md:text-lg font-bold shimmer-orange">
-              Outfit your MindStack
+              {t.header.slogan1}
             </h1>
             <h2 className="text-xs sm:text-sm font-bold shimmer-orange">
-              The only Brand merging Code & Cloth.
+              {t.header.slogan2}
             </h2>
           </div>
           
           {/* Menu items on right - Compact */}
           <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+            <LanguageToggle 
+              currentLanguage={currentLanguage} 
+              onLanguageChange={setCurrentLanguage} 
+            />
             <button className="text-orange-400 hover:text-orange-300 font-mono text-xs sm:text-sm font-bold transition-all duration-300 hover:scale-105 px-2 py-0.5 rounded border border-transparent hover:border-orange-500/30">
-              Waitlist
+              {t.header.waitlist}
             </button>
             <button className="text-orange-400 hover:text-orange-300 font-mono text-xs sm:text-sm font-bold transition-all duration-300 hover:scale-105 px-2 py-0.5 rounded border border-transparent hover:border-orange-500/30">
-              Contact
+              {t.header.contact}
             </button>
           </div>
         </div>
@@ -228,16 +268,29 @@ function App() {
           </div>
         </div>
 
-        {/* Fixed UI Elements - Outside image container */}
-        <div className="relative z-10" style={{minHeight: 'calc(100vh - 2.5rem)'}}>
-          
-          {/* Top Right - Countdown Timer (fixed and properly sized) */}
-          <div className="fixed top-16 right-4 z-20">
+        {/* Responsive Overlay Container - Scales all elements together */}
+        <div className="absolute inset-0 w-full h-full" style={{
+          transform: 'scale(var(--scale-factor, 1))',
+          transformOrigin: 'center center',
+          transition: 'transform 0.2s ease-out'
+        }}>
+
+          {/* Top Right - Countdown Timer */}
+          <div className="absolute" style={{
+            top: '10%',
+            right: '2%',
+            zIndex: 20
+          }}>
             <CountdownTimer />
           </div>
 
-          {/* Bottom Left - Blacklist Button (fixed positioning) */}
-          <div className="fixed bottom-8 left-8 w-96 z-20">
+          {/* Bottom Left - Blacklist Button */}
+          <div className="absolute" style={{
+            bottom: '8%',
+            left: '2%',
+            width: '400px',
+            zIndex: 20
+          }}>
             <div className="bg-black/90 backdrop-blur-md rounded-lg p-6 border border-orange-500/30 space-y-4">
               {!showEmailInput ? (
                 <button 
@@ -303,19 +356,6 @@ function App() {
             </div>
           </div>
 
-          {/* Bottom Right - First Mover Stats (fixed positioning) */}
-          <div className="fixed bottom-8 right-8 w-80 z-20">
-            <div className="bg-black/90 backdrop-blur-md rounded-lg p-6 border border-orange-500/50">
-              <p className="text-orange-400 font-mono text-sm mb-2">First movers get early access + exclusive drop.</p>
-              <p className="text-red-400 font-bold text-base glitch-text mb-3">Miss it, miss out.</p>
-              
-              <div className="flex items-center gap-2 justify-center">
-                <Users className="w-5 h-5 text-orange-500" />
-                <span className="font-mono text-2xl shimmer-orange count-animation">{blacklistCount.toLocaleString()}</span>
-              </div>
-              <p className="text-orange-300 text-sm font-mono text-center mt-1">joined the Tribe</p>
-            </div>
-          </div>
 
         </div>
       </section>
@@ -325,7 +365,7 @@ function App() {
         <MatrixRain intensity="intense" className="opacity-80" />
         <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
           <h2 className="text-5xl md:text-7xl font-bold mb-8 shimmer-orange">
-            REBELZ AI REVOLUTION
+            {t.matrix.title.toUpperCase()}
           </h2>
           <div className="bg-black/90 backdrop-blur-md rounded-2xl p-8 border border-orange-500/30">
             <pre className="text-orange-400 font-mono text-lg leading-relaxed">

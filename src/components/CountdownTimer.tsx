@@ -9,8 +9,10 @@ const CountdownTimer: React.FC = () => {
   });
 
   useEffect(() => {
-    // HARDCODED: 45 days from June 22, 2025 = July 7, 2025
-    const targetDate = new Date('2025-07-07T23:59:59Z');
+    // Set target date to 45 days from now
+    const targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + 45);
+    targetDate.setHours(23, 59, 59, 0);
 
     const timer = setInterval(() => {
       const now = new Date().getTime();
@@ -33,15 +35,15 @@ const CountdownTimer: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-black/90 backdrop-blur-md rounded-2xl p-6 border border-orange-500/30">
-      <h3 className="text-orange-500 font-bold text-lg mb-4 text-center">Drop in:</h3>
-      <div className="flex justify-center space-x-4">
+    <div className="bg-black/90 backdrop-blur-md rounded-lg p-3 border border-orange-500/30 w-80">
+      <h3 className="text-orange-500 font-bold text-sm mb-2 text-center">Blacklist closes in:</h3>
+      <div className="grid grid-cols-4 gap-2">
         {Object.entries(timeLeft).map(([unit, value]) => (
           <div key={unit} className="text-center">
-            <div className="bg-orange-500 text-black font-bold text-2xl px-3 py-2 rounded-lg min-w-[60px]">
+            <div className="bg-orange-500 text-black font-bold text-lg rounded w-full h-12 flex items-center justify-center">
               {value.toString().padStart(2, '0')}
             </div>
-            <div className="text-white text-xs mt-1 uppercase">{unit}</div>
+            <div className="text-white text-xs mt-1 uppercase font-mono">{unit}</div>
           </div>
         ))}
       </div>
