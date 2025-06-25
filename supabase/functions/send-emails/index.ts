@@ -53,7 +53,7 @@ serve(async (req) => {
 
     // Prepare emails
     const adminEmail = 'clarencejohnson@hotmail.de'
-    const fromEmail = 'noreply@rebelzai.com' // Change this to your verified domain
+    const fromEmail = 'noreply@rebelz-ai.com' // Change this to your verified domain
     
     // User confirmation email template
     const userEmailTemplate = `

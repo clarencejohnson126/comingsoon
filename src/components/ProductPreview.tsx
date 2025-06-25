@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, Star, Code2, Cpu } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, Star, Code2, Cpu, X, ZoomIn } from 'lucide-react';
 import MatrixRain from './MatrixRain';
 
 const ProductPreview: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
   
   const products = [
     {
       id: 1,
       name: "The Trifecta Hoodie",
-      preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//Hoodie%20front%20and%20back.png",
+      preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//ChatGPT%20Image%20Jun%2026,%202025,%2012_36_02%20AM.png",
       description: "Embedded Code inside sleeve for retrieving community perks",
       price: "$/€/BTC/ETH/SOL/USDT",
       features: ["French Terry Fabric", "GSM 350 brushed", "Embroided Label Tag at bottom back \"First Mover Collection\"", "Limited Edition"]
@@ -17,7 +18,7 @@ const ProductPreview: React.FC = () => {
     {
       id: 2,
       name: "Fitted and Automated Tee",
-      preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//ChatGPT%20Image%20Jun%2025,%202025,%2010_09_38%20PM.png",
+      preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//ChatGPT%20Image%20Jun%2026,%202025,%2012_49_38%20AM.png",
       description: "Obey nobody. Automate everything",
       price: "$/€/BTC/ETH/SOL/USDT",
       features: ["Custom Code", "Organic Cotton", "Embroided Label tag at bottom left front \"Verified Vibe Coder\""]
@@ -31,6 +32,35 @@ const ProductPreview: React.FC = () => {
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + products.length) % products.length);
   };
+
+  const openEnlargedImage = (imageUrl: string) => {
+    setEnlargedImage(imageUrl);
+  };
+
+  const closeEnlargedImage = () => {
+    setEnlargedImage(null);
+  };
+
+  // Handle escape key to close modal
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && enlargedImage) {
+        closeEnlargedImage();
+      }
+    };
+
+    if (enlargedImage) {
+      document.addEventListener('keydown', handleKeyPress);
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+      document.body.style.overflow = 'unset';
+    };
+  }, [enlargedImage]);
 
   return (
     <section className="relative py-20 bg-gradient-to-b from-gray-900 to-black">
@@ -48,14 +78,27 @@ const ProductPreview: React.FC = () => {
         <div className="relative">
           <div className="bg-black/50 backdrop-blur-md rounded-3xl p-8 border border-orange-500/30 hover-glow">
             <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div className="relative">
+              <div className="relative group cursor-pointer" onClick={() => openEnlargedImage(products[currentSlide].preview)}>
                 <img
                   src={products[currentSlide].preview}
                   alt={products[currentSlide].name}
-                  className="w-full h-96 object-cover rounded-2xl border-2 border-orange-500/50"
+                  className="w-full h-96 object-cover rounded-2xl border-2 border-orange-500/50 transition-all duration-300 group-hover:brightness-75"
                 />
+                
+                {/* Hover overlay with zoom icon */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/30 rounded-2xl">
+                  <div className="bg-orange-500 rounded-full p-3">
+                    <ZoomIn className="w-8 h-8 text-black" />
+                  </div>
+                </div>
+                
                 <div className="absolute top-4 left-4 bg-orange-500 text-black px-3 py-1 rounded-full font-bold text-sm">
                   EXCLUSIVE
+                </div>
+                
+                {/* Click to enlarge hint */}
+                <div className="absolute bottom-4 right-4 bg-black/70 backdrop-blur-sm text-orange-400 px-2 py-1 rounded text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  Click to enlarge
                 </div>
               </div>
               
@@ -121,6 +164,40 @@ const ProductPreview: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Enlarged Image Modal */}
+      {enlargedImage && (
+        <div className="fixed inset-0 z-[300] flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-black/90 backdrop-blur-sm"
+            onClick={closeEnlargedImage}
+          />
+          
+          {/* Modal Content */}
+          <div className="relative max-w-6xl max-h-[90vh] w-full">
+            {/* Close Button */}
+            <button
+              onClick={closeEnlargedImage}
+              className="absolute -top-12 right-0 bg-orange-500/20 hover:bg-orange-500/40 backdrop-blur-md rounded-full p-3 transition-all duration-300 z-10"
+            >
+              <X className="w-6 h-6 text-orange-500" />
+            </button>
+            
+            {/* Enlarged Image */}
+            <img
+              src={enlargedImage}
+              alt="Enlarged product view"
+              className="w-full h-full object-contain rounded-2xl border-2 border-orange-500/50 shadow-2xl"
+            />
+            
+            {/* Instructions */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 backdrop-blur-sm text-orange-400 px-4 py-2 rounded-lg text-sm font-mono">
+              Press ESC or click outside to close
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

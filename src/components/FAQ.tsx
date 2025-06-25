@@ -91,8 +91,8 @@ const FAQ: React.FC = () => {
           </div>
           <p className="text-gray-400 font-mono">
             Email us at{' '}
-            <a href="mailto:help@rebelzai.com" className="text-orange-500 hover:text-orange-400 transition-colors">
-              help@rebelzai.com
+                            <a href="mailto:thinkbig@rebelz-ai.com" className="text-orange-500 hover:text-orange-400 transition-colors">
+                  thinkbig@rebelz-ai.com
             </a>
           </p>
         </div>

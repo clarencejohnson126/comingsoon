@@ -164,7 +164,7 @@ const Disclaimer: React.FC = () => {
                   <p className="font-mono">
                     For questions about this disclaimer, please contact:
                     <br />
-                    <span className="text-orange-400">legal@rebelzai.com</span>
+                    <span className="text-orange-400">legal@rebelz-ai.com</span>
                   </p>
                 </div>
               </section>

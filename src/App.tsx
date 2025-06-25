@@ -474,13 +474,7 @@ function App() {
       <footer className="bg-black border-t border-orange-500/30 py-8">
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center gap-4">
-              <img
-                src="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/images/clarencejohnson_hotmail_de/ChatGPT%20Image%20Jun%2022,%202025,%2002_06_45%20PM.png"
-                alt="REBELZ AI Logo"
-                className="w-16 h-auto"
-                style={{filter: 'brightness(1.1) contrast(1.1)'}}
-              />
+            <div className="flex items-center">
               <div>
                 <p className="text-orange-500 font-bold text-lg shimmer-orange">REBELZ AI</p>
                 <p className="text-gray-400 text-sm font-mono">Rep your TechStack</p>
