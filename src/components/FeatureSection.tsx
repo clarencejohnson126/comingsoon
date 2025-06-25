@@ -82,22 +82,7 @@ const FeatureSection: React.FC = () => {
           ))}
         </div>
 
-        {/* Tech Stack Showcase */}
-        <div className="mt-20 text-center">
-          <h3 className="text-2xl font-bold mb-8 shimmer-orange">
-            Powered by cutting-edge tech
-          </h3>
-          <div className="flex flex-wrap justify-center gap-6">
-            {['React', 'TypeScript', 'Web3', 'AI/ML', 'IoT', 'Blockchain', 'Smart Contracts', 'Neural Networks'].map((tech, index) => (
-              <div 
-                key={index}
-                className="bg-orange-500/10 backdrop-blur-md rounded-full px-6 py-3 border border-orange-500/30 hover:border-orange-500/60 transition-all duration-300"
-              >
-                <span className="text-orange-400 font-mono font-bold">{tech}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+
       </div>
     </section>
   );
