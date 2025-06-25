@@ -79,24 +79,7 @@ const TestimonialSection: React.FC = () => {
           ))}
         </div>
 
-        {/* Community Stats */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
-          {[
-            { value: '12.7k', label: 'Developers' },
-            { value: '847', label: 'Blacklisted' },
-            { value: '23', label: 'Countries' },
-            { value: '99.8%', label: 'Satisfaction' }
-          ].map((stat, index) => (
-            <div key={index} className="text-center">
-              <div className="text-4xl font-bold shimmer-orange mb-2">
-                {stat.value}
-              </div>
-              <div className="text-orange-300 font-mono text-sm">
-                {stat.label}
-              </div>
-            </div>
-          ))}
-        </div>
+
       </div>
     </section>
   );
