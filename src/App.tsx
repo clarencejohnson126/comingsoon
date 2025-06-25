@@ -426,7 +426,7 @@ function App() {
             Ready to Deploy?
           </h2>
           <h3 className="text-2xl md:text-3xl font-bold mb-8 shimmer-orange">
-            Join the Rebelz AI Revolution
+            Join Us & Rep your Stack
           </h3>
           <p className="text-xl mb-8 text-orange-300 font-mono">
             No spam, no sellout. Just drop alerts.
