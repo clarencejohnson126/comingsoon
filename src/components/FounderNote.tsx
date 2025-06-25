@@ -1,21 +1,34 @@
-import React from 'react';
-import { Coffee, Code, Heart } from 'lucide-react';
+import React, { useState } from 'react';
+import { Coffee, Code, Heart, X } from 'lucide-react';
 import MatrixRain from './MatrixRain';
 
 const FounderNote: React.FC = () => {
+  const [showImageModal, setShowImageModal] = useState(false);
+
+  const handleImageClick = () => {
+    setShowImageModal(true);
+  };
+
+  const closeModal = () => {
+    setShowImageModal(false);
+  };
+
   return (
-    <section className="relative py-20 bg-gradient-to-b from-gray-900 to-black">
-      <MatrixRain intensity="subtle" className="opacity-30" />
-      <div className="relative z-10 max-w-4xl mx-auto px-6">
-        <div className="bg-black/50 backdrop-blur-md rounded-3xl p-12 border border-orange-500/30 hover-glow">
-          <div className="flex flex-col md:flex-row items-center gap-8">
-            <div className="flex-shrink-0">
-              <img
-                src="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//out-2-1.png"
-                alt="Clarence - Founder"
-                className="w-32 h-32 rounded-full border-4 border-orange-500/50"
-              />
-            </div>
+    <>
+      <section className="relative py-20 bg-gradient-to-b from-gray-900 to-black">
+        <MatrixRain intensity="subtle" className="opacity-30" />
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <div className="bg-black/50 backdrop-blur-md rounded-3xl p-12 border border-orange-500/30 hover-glow">
+            <div className="flex flex-col md:flex-row items-center gap-8">
+              <div className="flex-shrink-0">
+                <img
+                  src="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//out-2-1.png"
+                  alt="Clarence - Founder"
+                  className="w-48 h-48 rounded-full border-4 border-orange-500/50 cursor-pointer hover:border-orange-500 hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/30"
+                  onClick={handleImageClick}
+                  title="Click to view larger image"
+                />
+              </div>
             
             <div className="flex-1 text-center md:text-left">
               <h3 className="text-3xl font-bold mb-6 shimmer-orange">
@@ -52,6 +65,31 @@ const FounderNote: React.FC = () => {
         </div>
       </div>
     </section>
+
+    {/* Image Modal */}
+    {showImageModal && (
+      <div 
+        className="fixed inset-0 z-[200] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+        onClick={closeModal}
+      >
+        <div className="relative max-w-2xl max-h-screen">
+          <button
+            onClick={closeModal}
+            className="absolute -top-12 right-0 text-white hover:text-orange-400 transition-colors duration-300"
+            title="Close"
+          >
+            <X className="w-8 h-8" />
+          </button>
+          <img
+            src="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//out-2-1.png"
+            alt="Clarence - Founder (Full Size)"
+            className="max-w-full max-h-screen rounded-2xl border-4 border-orange-500/50 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      </div>
+    )}
+  </>
   );
 };
 
