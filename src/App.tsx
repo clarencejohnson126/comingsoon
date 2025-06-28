@@ -3,6 +3,7 @@ import { Users, Zap, Eye, ArrowRight, Code, Crown, Lock, Star, Cpu, Shield, Coff
 import MatrixRain from './components/MatrixRain';
 import CountdownTimer from './components/CountdownTimer';
 import ContactForm from './components/ContactForm';
+import CurtainReveal from './components/CurtainReveal';
 
 import ProductPreview from './components/ProductPreview';
 import FeatureSection from './components/FeatureSection';
@@ -23,6 +24,7 @@ function App() {
   const [showEmailPopup, setShowEmailPopup] = useState(false);
   const [currentLanguage, setCurrentLanguage] = useState<Language>('en');
   const [showContactForm, setShowContactForm] = useState(false);
+  const [curtainRevealed, setCurtainRevealed] = useState(false);
   
   const t = useTranslation(currentLanguage);
   const fullText = t.hero.typewriterText;
@@ -186,8 +188,29 @@ function App() {
     setShowContactForm(false);
   };
 
+  const handleCurtainRevealComplete = () => {
+    setCurtainRevealed(true);
+  };
+
+  const handleCurtainGetBlacklisted = () => {
+    setShowEmailPopup(true);
+    supabaseHelpers.trackEvent('curtain_blacklist_click', { 
+      timestamp: new Date().toISOString()
+    });
+  };
+
+  // Hero images for curtain reveal - responsive
+  const heroImage = "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/ChatGPT%20Image%20Jun%2022,%202025,%2009_57_27%20PM.png";
+  const mobileHeroImage = "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/image%20(2).jpeg";
+
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+    <CurtainReveal
+      heroImage={heroImage}
+      mobileHeroImage={mobileHeroImage}
+      onRevealComplete={handleCurtainRevealComplete}
+      onGetBlacklisted={handleCurtainGetBlacklisted}
+    >
+      <div className="min-h-screen bg-black text-white overflow-x-hidden">
       {/* Header Bar - Restored with Mobile Optimization */}
       <div className="fixed top-0 left-0 right-0 z-[100] bg-black/95 backdrop-blur-md border-b border-orange-500/50 shadow-lg">
         <div className="flex items-center justify-between px-2 sm:px-4 py-2">
@@ -673,7 +696,8 @@ function App() {
         isOpen={showContactForm} 
         onClose={handleCloseContactForm} 
       />
-    </div>
+      </div>
+    </CurtainReveal>
   );
 }
 
