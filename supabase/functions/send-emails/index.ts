@@ -52,7 +52,7 @@ serve(async (req) => {
     }
 
     // Prepare emails
-    const adminEmail = 'clarencejohnson@hotmail.de'
+    const adminEmail = 'thinkbig@rebelz-ai.com'
     const fromEmail = 'noreply@rebelz-ai.com' // Change this to your verified domain
     
     // User confirmation email template
@@ -61,7 +61,7 @@ serve(async (req) => {
       <html>
         <head>
           <meta charset="utf-8">
-          <title>Welcome to Rebelz AI Underground</title>
+          <title>Welcome to Rebelz AI Apparel</title>
           <style>
             body { 
               font-family: 'Courier New', monospace; 
@@ -85,10 +85,10 @@ serve(async (req) => {
             .logo { 
               font-size: 32px; 
               font-weight: bold; 
-              background: linear-gradient(135deg, #ff4500, #ff7f50); 
-              -webkit-background-clip: text; 
-              -webkit-text-fill-color: transparent; 
-              background-clip: text; 
+              color: #ff7f50;
+              text-align: center;
+              text-shadow: 0 0 10px #ff4500;
+              letter-spacing: 3px;
             }
             .content { 
               line-height: 1.6; 
@@ -103,6 +103,23 @@ serve(async (req) => {
               font-family: 'Courier New', monospace; 
               color: #ff7f50; 
             }
+            .cta-section {
+              text-align: center;
+              margin: 30px 0;
+              padding: 20px 0;
+            }
+            .cta-button {
+              display: inline-block;
+              background: linear-gradient(135deg, #ff4500, #ff7f50);
+              color: #000;
+              text-decoration: none;
+              padding: 12px 24px;
+              border-radius: 8px;
+              font-weight: bold;
+              font-family: 'Courier New', monospace;
+              border: 2px solid #ff7f50;
+              transition: all 0.3s ease;
+            }
             .footer { 
               margin-top: 30px; 
               padding-top: 20px; 
@@ -116,46 +133,42 @@ serve(async (req) => {
         <body>
           <div class="container">
             <div class="header">
-              <div class="logo">REBELZ AI</div>
-              <p style="color: #ff7f50; margin: 10px 0;">Welcome to the Underground</p>
+              <div class="logo">🔥 REBELZ AI 🔥</div>
+              <p style="color: #ff7f50; margin: 10px 0;">Welcome to the Community</p>
             </div>
             
             <div class="content">
-              <h2 style="color: #ff7f50;">You're In. Welcome to the Rebellion.</h2>
+              <h2 style="color: #ff7f50;">Welcome to Rebelz AI</h2>
               
-              <p>Yo ${userName || 'Rebel'},</p>
+              <p style="color: #ff7f50;">Hello,</p>
               
-              <p>You just joined the <strong>Rebelz AI Underground</strong> - the most exclusive community where code meets streetwear.</p>
+              <p style="color: #ff7f50;">Thanks for joining the Rebelz AI community. I'm <strong style="color: #ff4500;">Clarence Johnson</strong>, founder of Rebelz AI.</p>
               
-              <div class="code-block">
-function welcomeToRebelz() {<br>
-&nbsp;&nbsp;if (conformity.detected()) {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;rebelz.ai.activate();<br>
-&nbsp;&nbsp;&nbsp;&nbsp;mindset.upgrade();<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return independence;<br>
-&nbsp;&nbsp;}<br>
-}
-              </div>
+              <p style="color: #ff7f50;">Here's what you can expect as part of the crew:</p>
               
-              <p><strong>What happens next?</strong></p>
-              <ul style="color: #ff7f50;">
-                <li>🔥 <strong>First dibs</strong> on limited drops before anyone else</li>
-                <li>🎯 <strong>Exclusive colorways</strong> not available to the public</li>
-                <li>🗳️ <strong>Vote on designs</strong> - your code, your choice</li>
-                <li>⚡ <strong>Early access</strong> to new tech-inspired collections</li>
+              <ul style="color: #ff7f50; margin: 15px 0; padding-left: 20px;">
+                <li style="margin-bottom: 8px;">Early access to new drops before they go public</li>
+                <li style="margin-bottom: 8px;">Some exclusive color options just for members</li>
+                <li style="margin-bottom: 8px;">Occasional polls where your feedback helps shape our designs</li>
+                <li style="margin-bottom: 8px;">Updates about new tech-inspired collections</li>
               </ul>
               
-              <p>Keep your eyes on your inbox. When we drop, you'll be the first to know.</p>
+              <p style="color: #ff7f50;">I'll keep you in the loop when we have something worth sharing. No spam, just honest updates and first access when something real goes live.</p>
               
-              <p style="color: #ff7f50; font-weight: bold;">Deploy Yourself. Don't Obey. Join the Movement.</p>
+              <p style="color: #ff7f50;">If you ever want to share feedback or connect, just reply to this email. I read every message.</p>
               
-              <p>Welcome to the future of fashion,<br>
-              <strong>The Rebelz AI Team</strong></p>
+              <div class="cta-section">
+                <a href="https://www.rebelzai.shop" class="cta-button">Coming Soon Page</a>
+              </div>
+              
+              <p style="color: #ff7f50;">See you soon,<br>
+              <strong style="color: #ff4500;">Clarence Johnson</strong><br>
+              <span style="color: #ff7f50;">Founder, Rebelz AI</span></p>
             </div>
             
             <div class="footer">
-              <p>This email was sent to ${userEmail}</p>
-              <p>Rebelz AI - Where Code Meets Cloth</p>
+              <p style="color: #ff7f50;">This email was sent to ${userEmail}</p>
+              <p style="color: #ff7f50;">Rebelz AI - Where Code Meets Cloth</p>
             </div>
           </div>
         </body>
@@ -220,7 +233,7 @@ function welcomeToRebelz() {<br>
         body: JSON.stringify({
           from: fromEmail,
           to: [userEmail],
-          subject: '🔥 Welcome to Rebelz AI Underground - You\'re Blacklisted!',
+          subject: '🔥 Welcome to Rebelz AI Apparel - You\'re Blacklisted!',
           html: userEmailTemplate,
         }),
       }),

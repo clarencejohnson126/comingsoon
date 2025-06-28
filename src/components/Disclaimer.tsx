@@ -11,7 +11,7 @@ const Disclaimer: React.FC = () => {
           <div className="flex items-center gap-4">
             <img
               src="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/images/clarencejohnson_hotmail_de/ChatGPT%20Image%20Jun%2022,%202025,%2002_06_45%20PM.png"
-              alt="REBELZ AI Logo"
+              alt="Rebelz AI Apparel Logo"
               className="w-20 h-auto"
               style={{filter: 'brightness(1.1) contrast(1.1)'}}
             />

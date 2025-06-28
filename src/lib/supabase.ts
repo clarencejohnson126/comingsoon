@@ -57,7 +57,10 @@ export const supabaseHelpers = {
       }
 
       // Try to trigger email workflow, but don't fail if it doesn't work
-      let emailResult = { 
+      let emailResult: { 
+        success: boolean; 
+        emailStatus: { userEmailSent: boolean; adminEmailSent: boolean; errors: any[] }
+      } = { 
         success: false, 
         emailStatus: { userEmailSent: false, adminEmailSent: false, errors: [] }
       };

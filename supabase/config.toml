@@ -16,7 +16,6 @@ extra_search_path = ["public", "extensions"]
 max_rows = 1000
 
 [db]
-enabled = true
 # Port to use for the local database URL.
 port = 54322
 # Port used by db diff command to initialize the shadow database.
@@ -74,19 +73,6 @@ enable_anonymous_sign_ins = false
 [auth.email]
 # Allow/disallow new user signups via email to your project.
 enable_signup = true
-# If enabled, a user will be required to confirm any email change on both the old, and new email
-# addresses. If disabled, only the new email is required to confirm.
-double_confirm_email_changes = true
 # If enabled, users need to confirm their email address before signing in.
 enable_confirmations = false
 
-# Use pre-defined map of claims
-[auth.jwt]
-default_group_email_regex = "^.*@example\\.com$"
-admin_group_email_regex = "^.*@example\\.com$"
-
-[edge_functions]
-enabled = true
-# Configure one of the supported pooler modes: `transaction`, `session`.
-# Configure the bundler used for building edge functions: `esbuild`, `rollup`.
-bundler = "esbuild"

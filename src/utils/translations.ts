@@ -37,15 +37,15 @@ export const translations: Record<Language, Translations> = {
     header: {
       slogan1: 'Rep your TechStack',
       slogan2: 'The only Brand merging Code & Cloth.',
-      waitlist: 'Waitlist',
+      waitlist: 'Blacklist',
       contact: 'Contact'
     },
     hero: {
       typewriterText: "Deploy Yourself. Don't Obey. Join the Movement.",
       countdownText: 'Blacklist closes in:',
       blacklistButton: 'Get Blacklisted',
-      emailPlaceholder: 'Enter email...',
-      joinButton: 'Join',
+      emailPlaceholder: 'Enter your email...',
+      joinButton: 'Join Blacklist',
       cancel: 'Cancel',
       successMessage: 'Welcome to the Rebelz AI Underground! 🔥',
       errorMessage: 'Something went wrong. Try again.'
@@ -68,7 +68,7 @@ export const translations: Record<Language, Translations> = {
     header: {
       slogan1: 'Rep deinen TechStack',
       slogan2: 'Die einzige Marke, die Code & Kleidung vereint.',
-      waitlist: 'Warteliste',
+      waitlist: 'Blacklist',
       contact: 'Kontakt'
     },
     hero: {
@@ -76,7 +76,7 @@ export const translations: Record<Language, Translations> = {
       countdownText: 'Blacklist schließt in:',
       blacklistButton: 'Auf Blacklist setzen',
       emailPlaceholder: 'E-Mail eingeben...',
-      joinButton: 'Beitreten',
+      joinButton: 'Blacklist beitreten',
       cancel: 'Abbrechen',
       successMessage: 'Willkommen im Rebelz AI Underground! 🔥',
       errorMessage: 'Etwas ist schief gelaufen. Versuche es erneut.'

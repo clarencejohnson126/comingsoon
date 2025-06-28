@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Users, Zap, Eye, ArrowRight, Code, Crown, Lock, Star, Cpu, Shield, Coffee, Mail } from 'lucide-react';
+import { Users, Zap, Eye, ArrowRight, Code, Crown, Lock, Star, Cpu, Shield, Coffee, Mail, X } from 'lucide-react';
 import MatrixRain from './components/MatrixRain';
 import CountdownTimer from './components/CountdownTimer';
 import ContactForm from './components/ContactForm';
@@ -20,42 +20,12 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [showEmailInput, setShowEmailInput] = useState(false);
+  const [showEmailPopup, setShowEmailPopup] = useState(false);
   const [currentLanguage, setCurrentLanguage] = useState<Language>('en');
   const [showContactForm, setShowContactForm] = useState(false);
   
   const t = useTranslation(currentLanguage);
   const fullText = t.hero.typewriterText;
-
-  // Responsive scaling for overlay elements
-  useEffect(() => {
-    const updateScale = () => {
-      const viewport = {
-        width: window.innerWidth,
-        height: window.innerHeight - 40 // Account for header height
-      };
-      
-      // Base design dimensions (what elements were designed for)
-      const baseWidth = 1920;
-      const baseHeight = 1080;
-      
-      // Calculate scale factor based on viewport size
-      const scaleX = viewport.width / baseWidth;
-      const scaleY = viewport.height / baseHeight;
-      
-      // Use the smaller scale factor to maintain aspect ratio
-      // Add bounds to prevent elements from being too small or too large
-      const scaleFactor = Math.max(0.4, Math.min(1.2, Math.min(scaleX, scaleY)));
-      
-      // Set CSS custom property for scaling
-      document.documentElement.style.setProperty('--scale-factor', scaleFactor.toString());
-    };
-
-    // Update on mount and resize
-    updateScale();
-    window.addEventListener('resize', updateScale);
-    
-    return () => window.removeEventListener('resize', updateScale);
-  }, []);
 
   // Typewriter effect with continuous loop
   useEffect(() => {
@@ -117,6 +87,13 @@ function App() {
       }
     };
   }, []);
+
+  const handleBlacklistClick = () => {
+    setShowEmailPopup(true);
+    supabaseHelpers.trackEvent('blacklist_header_click', { 
+      timestamp: new Date().toISOString()
+    });
+  };
 
   const handleJoinBlacklist = () => {
     setShowEmailInput(true);
@@ -180,6 +157,12 @@ function App() {
           admin_email_sent: adminEmailSent || false,
           timestamp: new Date().toISOString()
         });
+
+        // Auto-close popup after successful signup
+        setTimeout(() => {
+          setShowEmailPopup(false);
+          setMessage('');
+        }, 3000);
       } else {
         setMessage(result.error || 'Something went wrong. Try again.');
       }
@@ -205,99 +188,173 @@ function App() {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
-      {/* Header Bar with Logo and Slogan - Compact */}
+      {/* Header Bar - Restored with Mobile Optimization */}
       <div className="fixed top-0 left-0 right-0 z-[100] bg-black/95 backdrop-blur-md border-b border-orange-500/50 shadow-lg">
-        <div className="flex items-center justify-between px-3 py-1.5">
-          {/* Logo on left - Text only */}
+        <div className="flex items-center justify-between px-2 sm:px-4 py-2">
+          {/* Logo */}
           <div className="flex items-center flex-shrink-0">
-            <span className="text-lg sm:text-xl font-bold shimmer-orange">
-              REBELZ AI
+            <span className="text-sm sm:text-lg md:text-xl font-bold shimmer-orange">
+              <span className="hidden sm:inline">Rebelz AI Apparel</span>
+              <span className="sm:hidden">Rebelz AI</span>
             </span>
           </div>
           
-          {/* MAIN SLOGAN - Compact */}
-          <div className="flex-1 text-center px-2">
-            <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold shimmer-orange">
+          {/* Main Slogan - Desktop only, properly spaced */}
+          <div className="hidden md:flex flex-1 flex-col items-center px-4">
+            <h1 className="text-lg lg:text-xl xl:text-2xl font-bold shimmer-orange mb-1">
               {t.header.slogan1}
             </h1>
-            <h2 className="text-xs sm:text-sm font-bold shimmer-orange">
+            <h2 className="text-sm lg:text-base font-bold shimmer-orange">
               {t.header.slogan2}
             </h2>
           </div>
           
-          {/* Menu items on right - Compact */}
-          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+          {/* Menu items */}
+          <div className="flex items-center gap-2 flex-shrink-0">
             <LanguageToggle 
               currentLanguage={currentLanguage} 
               onLanguageChange={setCurrentLanguage} 
             />
-            <button className="text-orange-400 hover:text-orange-300 font-mono text-xs sm:text-sm font-bold transition-all duration-300 hover:scale-105 px-2 py-0.5 rounded border border-transparent hover:border-orange-500/30">
+            <button 
+              onClick={handleBlacklistClick}
+              className="hidden sm:inline-block text-orange-400 hover:text-orange-300 font-mono text-xs md:text-sm font-bold transition-all duration-300 hover:scale-105 px-2 py-1 rounded border border-orange-500/30 hover:border-orange-500"
+            >
               {t.header.waitlist}
             </button>
             <button 
               onClick={handleContactClick}
-              className="text-orange-400 hover:text-orange-300 font-mono text-xs sm:text-sm font-bold transition-all duration-300 hover:scale-105 px-2 py-0.5 rounded border border-transparent hover:border-orange-500/30"
+              className="text-orange-400 hover:text-orange-300 font-mono text-xs md:text-sm font-bold transition-all duration-300 hover:scale-105 px-2 py-1 rounded border border-orange-500/30 hover:border-orange-500"
             >
-              {t.header.contact}
+              <span className="hidden sm:inline">{t.header.contact}</span>
+              <span className="sm:hidden">Contact</span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* Countdown Timer - Under header bar, upper middle right */}
-      <div className="fixed top-16 right-4 z-[90]">
-        <CountdownTimer />
-      </div>
-
-      {/* Full Screen Hero Section with Background Image */}
-      <section className="relative overflow-hidden" style={{marginTop: '2.5rem', minHeight: 'calc(100vh - 2.5rem)'}}>
-        {/* Full Screen Background Image Container */}
-        <div className="absolute top-0 left-0 right-0 bottom-0 w-full h-full">
-          <img
-            src="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//ChatGPT%20Image%20Jun%2022,%202025,%2009_57_27%20PM.png"
-            alt="Rebelz AI Hero"
-            className="w-full h-full object-cover opacity-95 brightness-110"
-          />
-          {/* Subtle overlay to ensure text readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30"></div>
+      {/* Email Popup Modal */}
+      {showEmailPopup && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            onClick={() => setShowEmailPopup(false)}
+          ></div>
           
-          {/* Monitor Screen - Terminal Output (positioned relative to image) */}
-          <div className="absolute" style={{
-            top: '58%',
-            left: '41%',
-            width: '12%',
-            transform: 'translate(-50%, -50%)',
-            zIndex: 20
-          }}>
-            <div style={{
-              color: '#36ff36',
-              fontFamily: "'Fira Mono', 'Courier New', monospace",
-              fontSize: '0.7rem',
-              lineHeight: '1.2',
-              letterSpacing: '0.05em'
-            }}>
-              {typewriterText}
-              <span className="animate-pulse" style={{color: '#36ff36'}}>|</span>
+          {/* Modal Content */}
+          <div className="relative bg-black/95 backdrop-blur-md rounded-2xl p-6 border border-orange-500/50 shadow-2xl max-w-md w-full">
+            {/* Close Button */}
+            <button
+              onClick={() => setShowEmailPopup(false)}
+              className="absolute top-4 right-4 text-orange-400 hover:text-orange-300 transition-colors"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            {/* Header */}
+            <div className="text-center mb-6">
+              <div className="flex items-center justify-center mb-3">
+                <Lock className="w-8 h-8 text-orange-500 mr-3" />
+                <h2 className="text-2xl font-bold shimmer-orange">Join the Blacklist</h2>
+              </div>
+              <p className="text-orange-300 font-mono text-sm">
+                Get exclusive early access to Rebelz AI drops
+              </p>
+              <div className="mt-3 text-orange-400 font-mono text-xs">
+                Current members: {blacklistCount}
+              </div>
+            </div>
+
+            {/* Email Form */}
+            <form onSubmit={handleEmailSubmit} className="space-y-4">
+              <div>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={t.hero.emailPlaceholder}
+                  className="w-full px-4 py-3 bg-black/50 border border-orange-500/50 rounded-lg text-white placeholder-orange-300/70 font-mono text-base focus:border-orange-500 focus:outline-none transition-colors"
+                  disabled={isLoading}
+                  autoFocus
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg font-bold text-base hover:from-orange-600 hover:to-orange-700 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 border border-orange-400 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isLoading ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    Joining...
+                  </>
+                ) : (
+                  <>
+                    <Mail className="w-5 h-5" />
+                    {t.hero.joinButton}
+                    <ArrowRight className="w-5 h-5" />
+                  </>
+                )}
+              </button>
+            </form>
+
+            {/* Success/Error Message */}
+            {message && (
+              <div className="mt-4 p-4 bg-black/50 rounded-lg border border-orange-500/30">
+                <p className="text-orange-400 font-mono text-sm whitespace-pre-line">
+                  {message}
+                </p>
+              </div>
+            )}
+
+            {/* Footer */}
+            <div className="mt-6 text-center">
+              <p className="text-orange-300/70 text-xs font-mono">
+                No spam. Just exclusive drops and early access.
+              </p>
             </div>
           </div>
         </div>
+      )}
 
-        {/* Responsive Overlay Container - Scales all elements together */}
-        <div className="absolute inset-0 w-full h-full" style={{
-          transform: 'scale(var(--scale-factor, 1))',
-          transformOrigin: 'center center',
-          transition: 'transform 0.2s ease-out'
-        }}>
+      {/* Countdown Timer - Desktop: top-right fixed */}
+      <div className="hidden md:block fixed top-14 sm:top-20 right-1 sm:right-4 z-[90]">
+        <CountdownTimer />
+      </div>
 
+      {/* Desktop Hero Section */}
+      <section className="hidden md:block relative overflow-hidden min-h-screen pt-16 sm:pt-20">
+        {/* Desktop Background Image */}
+        <div className="absolute inset-0 w-full h-full">
+          <picture>
+            <source 
+              media="(min-width: 768px)" 
+              srcSet="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//ChatGPT%20Image%20Jun%2022,%202025,%2009_57_27%20PM.png"
+            />
+            <img
+              src="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//ChatGPT%20Image%20Jun%2022,%202025,%2009_57_27%20PM.png"
+              alt="Rebelz AI Hero"
+              className="w-full h-full object-cover opacity-95 brightness-110"
+            />
+          </picture>
+          {/* Overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/40"></div>
+        </div>
 
+        {/* Desktop Content Overlay */}
+        <div className="relative z-10 h-full">
+          {/* Coming Soon Page Title - Upper Middle */}
+          <div className="absolute top-8 sm:top-12 left-1/2 transform -translate-x-1/2 z-30">
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold shimmer-orange font-mono text-center tracking-wide">
+              &lt; Coming Soon Page /&gt;
+            </h3>
+          </div>
 
-          {/* Bottom Left - Blacklist Button */}
-          <div className="absolute" style={{
-            bottom: '8%',
-            left: '2%',
-            width: '400px',
-            zIndex: 20
-          }}>
+          {/* CTA Section */}
+          {/* Desktop: Bottom left */}
+          <div className="hidden md:block absolute bottom-8 left-8 w-96 z-30">
             <div className="bg-black/90 backdrop-blur-md rounded-lg p-6 border border-orange-500/30 space-y-4">
               {!showEmailInput ? (
                 <button 
@@ -362,8 +419,113 @@ function App() {
               )}
             </div>
           </div>
+        </div>
+      </section>
 
+      {/* Mobile Hero Section */}
+      <section className="md:hidden min-h-screen bg-black flex flex-col pt-16">
+        {/* Mobile: Coming Soon Page Title */}
+        <div className="text-center py-4">
+          <h3 className="text-lg font-bold shimmer-orange font-mono tracking-wide">
+            &lt; Coming Soon Page /&gt;
+          </h3>
+        </div>
 
+        {/* Mobile: Title and Slogans */}
+        <div className="text-center px-4 mb-4">
+          <h1 className="text-xl font-bold shimmer-orange mb-2 leading-tight">
+            Rep your TechStack
+          </h1>
+          <p className="text-orange-300 text-sm leading-relaxed mb-4">
+            The only Brand merging Code & Cloth
+          </p>
+        </div>
+
+        {/* Mobile: Countdown Timer */}
+        <div className="flex justify-center mb-6">
+          <CountdownTimer />
+        </div>
+
+        {/* Mobile: Full Width Portrait Image */}
+        <div className="w-full h-[60vh] relative mb-4">
+          <picture>
+            <source 
+              media="(max-width: 767px)" 
+              srcSet="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//image%20(2).jpeg"
+            />
+            <img
+              src="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//image%20(2).jpeg"
+              alt="Rebelz AI Hero Mobile"
+              className="w-full h-full object-cover"
+            />
+          </picture>
+        </div>
+
+        {/* Mobile: CTA Button */}
+        <div className="p-4">
+          <div className="bg-black/95 backdrop-blur-md rounded-xl p-4 border border-orange-500/30 space-y-4 shadow-2xl">
+            {!showEmailInput ? (
+              <button 
+                onClick={handleJoinBlacklist}
+                className="group w-full px-4 py-3 bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg font-bold text-base hover:from-orange-600 hover:to-orange-700 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 pulse-orange border-2 border-orange-400 hover-glow"
+              >
+                <Lock className="w-5 h-5" />
+                Get Blacklisted
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+              </button>
+            ) : (
+              <form onSubmit={handleEmailSubmit} className="space-y-3">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter email..."
+                  className="w-full px-3 py-2 bg-black/50 border border-orange-500/50 rounded-lg text-white placeholder-orange-300/70 font-mono text-sm focus:border-orange-500 focus:outline-none"
+                  disabled={isLoading}
+                  autoFocus
+                />
+                <div className="flex gap-2">
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="flex-1 px-3 py-2 bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg font-bold text-sm hover:from-orange-600 hover:to-orange-700 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 border border-orange-400 disabled:opacity-50"
+                  >
+                    {isLoading ? (
+                      <>
+                        <div className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                        Joining...
+                      </>
+                    ) : (
+                      <>
+                        <Mail className="w-3 h-3" />
+                        Join
+                      </>
+                    )}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowEmailInput(false)}
+                    className="px-3 py-2 text-orange-400 hover:text-orange-300 font-mono text-xs rounded border border-orange-500/30 hover:border-orange-500"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            )}
+
+            {/* Success/Error Message */}
+            {message && (
+              <div className="bg-black/90 backdrop-blur-md rounded-lg p-3 border border-orange-500/50 relative">
+                <p className="text-orange-400 font-mono text-sm">{message}</p>
+                <button
+                  onClick={handleCloseMessage}
+                  className="absolute top-2 right-2 text-orange-500 hover:text-orange-300 text-lg"
+                >
+                  ×
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </section>
 
@@ -393,8 +555,6 @@ function App() {
 
       {/* Features Section - WITH MATRIX RAIN */}
       <FeatureSection />
-
-
 
       {/* Testimonials - WITH MATRIX RAIN */}
       <TestimonialSection />
@@ -449,7 +609,7 @@ function App() {
         </div>
       </section>
 
-      {/* Fixed Spotify Player - Bottom Right */}
+      {/* Fixed Spotify Player - Desktop Only */}
       <div className="fixed bottom-4 right-4 z-[90] hidden lg:block">
         <div className="bg-black/90 backdrop-blur-md rounded-2xl p-3 border border-orange-500/30 shadow-2xl">
           <div className="mb-2 text-center">
@@ -458,10 +618,10 @@ function App() {
             </h3>
           </div>
           <iframe 
-            style={{borderRadius: '8px'}} 
-            src="https://open.spotify.com/embed/track/2ufpTLLgG1Q1etucp78w5m?utm_source=generator" 
+            style={{borderRadius: '12px'}} 
+            src="https://open.spotify.com/embed/playlist/4XZgevu0u1PLNVlKfnbI2i?utm_source=generator&theme=0&view=coverart" 
             width="240" 
-            height="152" 
+            height="180" 
             frameBorder="0" 
             allowFullScreen={true}
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
@@ -470,13 +630,13 @@ function App() {
         </div>
       </div>
 
-      {/* Footer */}
+      {/* Footer - Restored Original Design */}
       <footer className="bg-black border-t border-orange-500/30 py-8">
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center">
               <div>
-                <p className="text-orange-500 font-bold text-lg shimmer-orange">REBELZ AI</p>
+                <p className="text-orange-500 font-bold text-lg shimmer-orange">Rebelz AI Apparel</p>
                 <p className="text-gray-400 text-sm font-mono">Rep your TechStack</p>
               </div>
             </div>
@@ -498,7 +658,7 @@ function App() {
             
             <div className="text-center md:text-right">
               <p className="text-gray-400 text-sm font-mono">
-                © 2025 Rebelz AI. All rights reserved.
+                © 2025 Rebelz AI Apparel. All rights reserved.
               </p>
               <p className="text-gray-500 text-xs font-mono mt-1">
                 Built with 💻 and ☕ by rebelz
