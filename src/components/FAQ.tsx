@@ -7,28 +7,28 @@ const FAQ: React.FC = () => {
 
   const faqs = [
     {
-      question: "What makes Rebelz AI different from other streetwear brands?",
-      answer: "We're the first brand built specifically for developers and tech professionals. Every design incorporates actual code, algorithms, and tech concepts. Plus, each item comes with blockchain verification and community voting rights."
+      question: "Why should I care about another 'tech' clothing brand?",
+      answer: "I mean, you shouldn't unless you're tired of wearing plain hoodies while debugging until 3am. I just make clothes for people who think in code. No revolutionary claims here, just shirts that get it."
     },
     {
-      question: "How does the Blacklist work?",
-      answer: "The Blacklist gives you early access to limited drops before they go public. Blacklist members get exclusive designs, pricing discounts, and voting power on future collections. Only 150 spots per drop cycle."
+      question: "What's this blacklist thing about?",
+      answer: "I drop stuff in small batches. Get on the list, you see it first. Don't, and you'll probably still find something decent elsewhere. I'm not running a secret society, just keeping things manageable."
     },
     {
-      question: "Are the clothes actually smart/connected?",
-      answer: "Selected pieces feature IoT connectivity, LED elements, and responsive fabrics. Our Neural Network hoodie can actually display different patterns based on your environment and mood via a mobile app."
+      question: "Are your clothes actually 'smart' or is that marketing BS?",
+      answer: "Good question and the answer is yes and no. First of all they're just clothes. Some have cool prints of algorithms and code snippets. But the catch are the NFC Tags that reveal for every buyer some cool perks, nothing fancy and expensive but makes the brand stand out as an Collectable. I'm not putting WiFi in your t-shirt. That would be weird and unnecessary."
     },
     {
-      question: "What programming languages do you support?",
-      answer: "All of them! From Python and JavaScript to Rust and Go. You can even request custom code prints in your favorite language or framework. We speak fluent syntax."
+      question: "What programming languages do you rep?",
+      answer: "Whatever doesn't make me cringe. Depends on the Task at hand but in general TypeScript or Go now, Next.JS, Supabase, React Native for Mobile and MCP Integrations wherever available and secure. I'm not judging your stack choices (much)."
     },
     {
-      question: "How does blockchain verification work?",
-      answer: "Each authentic Rebelz AI item comes with an NFT certificate of authenticity. This prevents counterfeiting and gives you provable ownership of limited edition pieces."
+      question: "Do you ship worldwide?",
+      answer: "I ship where the postal service doesn't lose packages. But to be honest I'm trying to ship everywhere. Right now I'm shipping out of Mannheim, Germany after I received the merch from my asian supplier (doesn't get realer than that. Weekly bleeps in my hustle coming soon). That's why always consider extra shipping Fee when you order out of Germany/Europe. But true support finds no boundaries, we will find a way to get your piece shipped to you."
     },
     {
-      question: "Do you ship internationally?",
-      answer: "Yes! We ship to our global network of rebelz in over 50 countries. Shipping is carbon-neutral and tracked via our custom logistics algorithm."
+      question: "How do I wash these without destroying them?",
+      answer: "Good question since I actually care about quality. The French terry hoodie (80% cotton, 20% polyester, 350 gsm) - wash cold, inside out, hang dry. Don't put it in the dryer unless you want a crop top. The organic cotton tees (100% cotton, 220 gsm) are pretty chill - cold wash, low heat dry if you must. These are the first two pieces I'm dropping. Vests, tech trousers, hats and more coming in the pipeline, but let's not get ahead of ourselves."
     }
   ];
 
@@ -45,7 +45,7 @@ const FAQ: React.FC = () => {
             FAQ.resolve()
           </h2>
           <p className="text-xl text-orange-300 font-mono">
-            Debug your questions here
+            Your questions, my honest answers
           </p>
         </div>
 
@@ -87,10 +87,10 @@ const FAQ: React.FC = () => {
         <div className="text-center mt-12">
           <div className="flex items-center justify-center gap-3 mb-4">
             <HelpCircle className="w-6 h-6 text-orange-500" />
-            <span className="text-orange-400 font-mono">Still have questions?</span>
+            <span className="text-orange-400 font-mono">Still confused?</span>
           </div>
           <p className="text-gray-400 font-mono">
-            Email us at{' '}
+            Hit me up at{' '}
                             <a href="mailto:thinkbig@rebelz-ai.com" className="text-orange-500 hover:text-orange-400 transition-colors">
                   thinkbig@rebelz-ai.com
             </a>

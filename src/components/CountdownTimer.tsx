@@ -9,27 +9,33 @@ const CountdownTimer: React.FC = () => {
   });
 
   useEffect(() => {
-    // Set target date to 45 days from now
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 45);
-    targetDate.setHours(23, 59, 59, 0);
+    // Set target date to exactly 45 days from today at 00:00:00
+    const today = new Date();
+    const targetDate = new Date(today);
+    targetDate.setDate(today.getDate() + 45);
+    targetDate.setHours(0, 0, 0, 0);
 
-    const timer = setInterval(() => {
+    const updateTimer = () => {
       const now = new Date().getTime();
       const distance = targetDate.getTime() - now;
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      if (distance > 0) {
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      setTimeLeft({ days, hours, minutes, seconds });
-
-      if (distance < 0) {
-        clearInterval(timer);
+        setTimeLeft({ days, hours, minutes, seconds });
+      } else {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       }
-    }, 1000);
+    };
+
+    // Update immediately
+    updateTimer();
+
+    // Then update every second
+    const timer = setInterval(updateTimer, 1000);
 
     return () => clearInterval(timer);
   }, []);

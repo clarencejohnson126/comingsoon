@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Star, Code2, Cpu, X, ZoomIn } from 'lucide-react';
 import MatrixRain from './MatrixRain';
 
-const ProductPreview: React.FC = () => {
+interface ProductPreviewProps {
+  onReserve?: () => void;
+}
+
+const ProductPreview: React.FC<ProductPreviewProps> = ({ onReserve }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
   
@@ -12,7 +16,7 @@ const ProductPreview: React.FC = () => {
       name: "The Trifecta Hoodie",
       preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//ChatGPT%20Image%20Jun%2026,%202025,%2012_36_02%20AM.png",
       description: "Embedded Code inside sleeve for retrieving community perks",
-      price: "$/€/BTC/ETH/SOL/USDT",
+      price: "Blacklist = Priority",
       features: ["French Terry Fabric", "GSM 350 brushed", "Embroided Label Tag at bottom back \"First Mover Collection\"", "Limited Edition"]
     },
     {
@@ -20,7 +24,7 @@ const ProductPreview: React.FC = () => {
       name: "Fitted and Automated Tee",
       preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//ChatGPT%20Image%20Jun%2026,%202025,%2012_49_38%20AM.png",
       description: "Obey nobody. Automate everything",
-      price: "$/€/BTC/ETH/SOL/USDT",
+      price: "Blacklist = Priority",
       features: ["Custom Code", "Organic Cotton", "Embroided Label tag at bottom left front \"Verified Vibe Coder\""]
     },
     {
@@ -28,7 +32,7 @@ const ProductPreview: React.FC = () => {
       name: "Neural Network Oversized Hoodie",
       preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//f87b2ace-87fa-471d-b112-4b7c4a21b067%20(1)%20(1).jpeg",
       description: "When your code thinks for itself",
-      price: "$/€/BTC/ETH/SOL/USDT",
+      price: "Blacklist = Priority",
       features: ["480 GSM heavyweight cotton", "Neural network print design", "Oversized streetwear fit", "Hidden tech pocket", "Glow-in-the-dark accents"]
     },
     {
@@ -36,7 +40,7 @@ const ProductPreview: React.FC = () => {
       name: "Binary Beast Crewneck",
       preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//263b7ec4-60c4-40e5-b999-0b145a272d3e.png",
       description: "01001000 01101001 - Decode the message",
-      price: "$/€/BTC/ETH/SOL/USDT",
+      price: "Blacklist = Priority",
       features: ["Premium cotton blend", "Binary code pattern", "Ribbed cuffs and hem", "Machine washable", "Unisex sizing"]
     },
     {
@@ -44,7 +48,7 @@ const ProductPreview: React.FC = () => {
       name: "Digital Focus Workspace Tee",
       preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//Arbeiten%20im%20digitalen%20Fokus.png",
       description: "Working in digital focus - where innovation happens",
-      price: "$/€/BTC/ETH/SOL/USDT",
+      price: "Blacklist = Priority",
       features: ["Ultra-soft organic cotton", "German-inspired design", "Anti-static fabric", "Breathable mesh panels", "Productivity mantra print"]
     },
     {
@@ -52,7 +56,7 @@ const ProductPreview: React.FC = () => {
       name: "AI Generated Classic",
       preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//ChatGPT%20Image%20Jun%2026,%202025,%2012_36_33%20AM.png",
       description: "Designed by algorithms, worn by rebels",
-      price: "$/€/BTC/ETH/SOL/USDT",
+      price: "Blacklist = Priority",
       features: ["AI-optimized color scheme", "Sustainable fabric blend", "Seamless construction", "Quick-dry technology", "Future-proof design"]
     },
     {
@@ -60,7 +64,7 @@ const ProductPreview: React.FC = () => {
       name: "Stack Overflow Sweatshirt",
       preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//eda3ed3f-fb5d-463d-a186-0172e21ba45c.png",
       description: "When your wardrobe throws exceptions",
-      price: "$/€/BTC/ETH/SOL/USDT",
+      price: "Blacklist = Priority",
       features: ["Exception-proof stitching", "Memory-efficient pockets", "Compiler-tested durability", "Stack-safe design", "Debug-friendly labels"]
     },
     {
@@ -68,7 +72,7 @@ const ProductPreview: React.FC = () => {
       name: "Terminal Interface Hoodie",
       preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/images//Screenshot%202025-06-28%20at%2002.24.56.png",
       description: "sudo wear style",
-      price: "$/€/BTC/ETH/SOL/USDT",
+      price: "Blacklist = Priority",
       features: ["Command-line inspired print", "Root access comfort", "Terminal green accents", "Bash-compatible fit", "Escape key pull tab"]
     },
     {
@@ -76,7 +80,7 @@ const ProductPreview: React.FC = () => {
       name: "Runtime Revolution Tee",
       preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//08cf55f5-ae3b-42a8-aad9-e67a90207149.png",
       description: "Executes flawlessly in any environment",
-      price: "$/€/BTC/ETH/SOL/USDT",
+      price: "Blacklist = Priority",
       features: ["Cross-platform compatibility", "Optimized performance fabric", "Runtime-tested comfort", "Memory leak resistant", "Zero downtime durability"]
     },
     {
@@ -84,7 +88,7 @@ const ProductPreview: React.FC = () => {
       name: "Code Repository Varsity",
       preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/images//Screenshot%202025-06-28%20at%2002.22.18.png",
       description: "git commit -m 'added style to wardrobe'",
-      price: "$/€/BTC/ETH/SOL/USDT",
+      price: "Blacklist = Priority",
       features: ["Version-controlled design", "Branch-resistant fabric", "Merge conflict free", "Pull request ready", "Open source inspired"]
     }
   ];
@@ -192,7 +196,10 @@ const ProductPreview: React.FC = () => {
                   </div>
                 </div>
 
-                <button className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-black font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base">
+                <button 
+                  onClick={onReserve}
+                  className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-black font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base"
+                >
                   Reserve This Drop
                 </button>
               </div>

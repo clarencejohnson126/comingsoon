@@ -170,7 +170,7 @@ const CurtainReveal: React.FC<CurtainRevealProps> = ({
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            Rep Your TechStack
+            Rep your TechStack
           </motion.h1>
           
           <motion.p 
@@ -179,7 +179,7 @@ const CurtainReveal: React.FC<CurtainRevealProps> = ({
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.8 }}
           >
-            The only Brand merging Code & Cloth.
+            Merch for Coders with AI & Guts
           </motion.p>
 
           {/* Live Ticker */}
@@ -292,7 +292,7 @@ const CurtainReveal: React.FC<CurtainRevealProps> = ({
              animate={{ y: 0, opacity: 1 }}
              transition={{ delay: 0.3, duration: 0.8 }}
            >
-             Rep Your TechStack
+             Rep your TechStack
            </motion.h1>
            
            <motion.p 
@@ -301,7 +301,7 @@ const CurtainReveal: React.FC<CurtainRevealProps> = ({
              animate={{ y: 0, opacity: 1 }}
              transition={{ delay: 0.5, duration: 0.8 }}
            >
-             The only Brand merging Code & Cloth.
+             Merch for Coders with AI & Guts
            </motion.p>
 
            {/* Live Ticker */}
@@ -382,6 +382,8 @@ const CurtainReveal: React.FC<CurtainRevealProps> = ({
                </div>
              </motion.div>
            )}
+
+
          </motion.div>
        </motion.div>
     </div>

@@ -204,12 +204,53 @@ function App() {
   const mobileHeroImage = "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/image%20(2).jpeg";
 
   return (
-    <CurtainReveal
-      heroImage={heroImage}
-      mobileHeroImage={mobileHeroImage}
-      onRevealComplete={handleCurtainRevealComplete}
-      onGetBlacklisted={handleCurtainGetBlacklisted}
-    >
+    <>
+      {/* Persistent Spotify Player - Never unmounts - Mobile & Desktop */}
+      <div 
+        className={`fixed transition-all duration-500 ${
+          curtainRevealed 
+            ? 'bottom-4 right-4 z-[90]' // Main app position - lower z-index
+            : 'bottom-32 sm:bottom-4 right-4 z-[10000]' // Curtain position - much higher on mobile, normal on desktop
+        }`}
+      >
+        <div className="bg-black/90 backdrop-blur-md rounded-2xl p-2 shadow-lg">
+          <div className="mb-1 text-center">
+            <h3 className="text-orange-400 font-mono text-[10px] sm:text-xs font-bold">
+              Late Night Stack Player
+            </h3>
+          </div>
+          <iframe 
+            style={{borderRadius: '12px'}} 
+            src="https://open.spotify.com/embed/playlist/4XZgevu0u1PLNVlKfnbI2i?utm_source=generator&theme=0&view=compact&autoplay=0&loop=1" 
+            width="300" 
+            height="90" 
+            className="sm:hidden"
+            frameBorder="0" 
+            allowFullScreen={true}
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+            loading="lazy"
+          />
+          {/* Desktop version with list view */}
+          <iframe 
+            style={{borderRadius: '12px'}} 
+            src="https://open.spotify.com/embed/playlist/4XZgevu0u1PLNVlKfnbI2i?utm_source=generator&theme=0&view=list&autoplay=0&loop=1" 
+            width="240" 
+            height="180" 
+            className="hidden sm:block"
+            frameBorder="0" 
+            allowFullScreen={true}
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <CurtainReveal
+        heroImage={heroImage}
+        mobileHeroImage={mobileHeroImage}
+        onRevealComplete={handleCurtainRevealComplete}
+        onGetBlacklisted={handleCurtainGetBlacklisted}
+      >
       <div className="min-h-screen bg-black text-white overflow-x-hidden">
       {/* Header Bar - Restored with Mobile Optimization */}
       <div className="fixed top-0 left-0 right-0 z-[100] bg-black/95 backdrop-blur-md border-b border-orange-500/50 shadow-lg">
@@ -283,9 +324,6 @@ function App() {
               <p className="text-orange-300 font-mono text-sm">
                 Get exclusive early access to Rebelz AI drops
               </p>
-              <div className="mt-3 text-orange-400 font-mono text-xs">
-                Current members: {blacklistCount}
-              </div>
             </div>
 
             {/* Email Form */}
@@ -460,7 +498,7 @@ function App() {
             Rep your TechStack
           </h1>
           <p className="text-orange-300 text-sm leading-relaxed mb-4">
-            The only Brand merging Code & Cloth
+            Merch for Coders with AI & Guts
           </p>
         </div>
 
@@ -574,7 +612,7 @@ function App() {
       </section>
 
       {/* Product Preview Section - WITH MATRIX RAIN */}
-      <ProductPreview />
+      <ProductPreview onReserve={handleBlacklistClick} />
 
       {/* Features Section - WITH MATRIX RAIN */}
       <FeatureSection />
@@ -587,17 +625,20 @@ function App() {
         <MatrixRain intensity="intense" className="opacity-30" />
         <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
           <div className="flex items-center justify-center gap-4 mb-6">
-            <Shield className="w-8 h-8 text-red-500" />
-            <h2 className="text-3xl md:text-5xl font-bold text-red-400 shimmer-orange">
-              REBELZ AI - RESTRICTED ACCESS
+            <Shield className="w-8 h-8 text-orange-500" />
+            <h2 className="text-3xl md:text-5xl font-bold text-orange-400 shimmer-orange">
+              ROLL CALL: FIRST MOVER ADVANTAGERS
             </h2>
-            <Shield className="w-8 h-8 text-red-500" />
+            <Shield className="w-8 h-8 text-orange-500" />
           </div>
-          <p className="text-xl font-mono text-red-300 mb-4">
-            Only <span className="text-red-500 font-bold text-3xl">150</span> Blacklist spots for the first Rebelz AI drop.
+          <p className="text-xl font-mono text-orange-300 mb-4">
+            Our First Collection: <span className="text-orange-500 font-bold text-2xl">100 Shirts</span> + <span className="text-orange-500 font-bold text-2xl">50 Hoodies</span>
           </p>
-          <p className="text-orange-400 font-mono">
-            Once they're gone, you're locked out until the next cycle.
+          <p className="text-orange-400 font-mono mb-2">
+            🚀 <strong>First Come, First Serve</strong> - Get ready to rep your stack!
+          </p>
+          <p className="text-orange-300 font-mono text-base">
+            Join the blacklist now to secure your spot.
           </p>
         </div>
       </section>
@@ -622,7 +663,7 @@ function App() {
             No spam, no sellout. Just drop alerts.
           </p>
           <button 
-            onClick={handleJoinBlacklist}
+            onClick={handleBlacklistClick}
             className="group px-16 py-8 bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl font-bold text-2xl hover:from-orange-600 hover:to-orange-700 transform hover:scale-110 transition-all duration-300 flex items-center gap-4 mx-auto pulse-orange border-4 border-orange-400"
           >
             <Code className="w-8 h-8" />
@@ -632,26 +673,7 @@ function App() {
         </div>
       </section>
 
-      {/* Fixed Spotify Player - Desktop Only */}
-      <div className="fixed bottom-4 right-4 z-[90] hidden lg:block">
-        <div className="bg-black/90 backdrop-blur-md rounded-2xl p-3 border border-orange-500/30 shadow-2xl">
-          <div className="mb-2 text-center">
-            <h3 className="text-orange-400 font-mono text-xs font-bold">
-              Late Night Stack Player
-            </h3>
-          </div>
-          <iframe 
-            style={{borderRadius: '12px'}} 
-            src="https://open.spotify.com/embed/playlist/4XZgevu0u1PLNVlKfnbI2i?utm_source=generator&theme=0&view=coverart" 
-            width="240" 
-            height="180" 
-            frameBorder="0" 
-            allowFullScreen={true}
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-            loading="lazy"
-          />
-        </div>
-      </div>
+
 
       {/* Footer - Restored Original Design */}
       <footer className="bg-black border-t border-orange-500/30 py-8">
@@ -698,6 +720,7 @@ function App() {
       />
       </div>
     </CurtainReveal>
+    </>
   );
 }
 

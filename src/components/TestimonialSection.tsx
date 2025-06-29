@@ -1,35 +1,36 @@
-import React from 'react';
-import { Quote, Github, Twitter, Linkedin } from 'lucide-react';
+import React, { useState } from 'react';
+import { Quote, Github, Twitter, Linkedin, X } from 'lucide-react';
 import MatrixRain from './MatrixRain';
 
 const TestimonialSection: React.FC = () => {
+  const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
   const testimonials = [
     {
       quote: "Finally, a brand that speaks my language. Literally wearing my favorite algorithm with Rebelz AI right now.",
       author: "@PromptSamurai",
       role: "Full Stack Rebel",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+      avatar: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//Screenshot%202025-06-29%20at%2019.30.45.png",
       platform: <Github className="w-4 h-4" />
     },
     {
       quote: "Streetwear for my inner AI. The Rebelz AI Neural Network hoodie literally reads my mind.",
       author: "@NerdModeOn",
       role: "AI Engineer",
-      avatar: "https://images.unsplash.com/photo-1494790108755-2616b9105db3?w=100&h=100&fit=crop&crop=face",
+      avatar: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//Screenshot%202025-06-29%20at%2019.31.13.png",
       platform: <Twitter className="w-4 h-4" />
     },
     {
       quote: "This isn't just clothing - it's a statement. Every Rebelz AI piece tells the story of digital rebellion.",
       author: "@CodeNinja42",
       role: "Blockchain Developer",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
+      avatar: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//Screenshot%202025-06-29%20at%2019.31.26.png",
       platform: <Linkedin className="w-4 h-4" />
     },
     {
       quote: "Been waiting for something like Rebelz AI forever. Fashion that actually understands tech culture.",
       author: "@ByteQueen",
       role: "DevOps Architect",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
+      avatar: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//Screenshot%202025-06-29%20at%2019.30.58.png",
       platform: <Github className="w-4 h-4" />
     }
   ];
@@ -63,7 +64,8 @@ const TestimonialSection: React.FC = () => {
                 <img
                   src={testimonial.avatar}
                   alt={testimonial.author}
-                  className="w-12 h-12 rounded-full border-2 border-orange-500/50"
+                  className="w-12 h-12 rounded-full border-2 border-orange-500/50 cursor-pointer hover:border-orange-500 transition-all duration-300 hover:scale-105"
+                  onClick={() => setEnlargedImage(testimonial.avatar)}
                 />
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
@@ -79,6 +81,28 @@ const TestimonialSection: React.FC = () => {
           ))}
         </div>
 
+        {/* Image Modal */}
+        {enlargedImage && (
+          <div 
+            className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={() => setEnlargedImage(null)}
+          >
+            <div className="relative max-w-4xl max-h-[90vh] w-full h-full flex items-center justify-center">
+              <button
+                onClick={() => setEnlargedImage(null)}
+                className="absolute top-4 right-4 z-60 bg-orange-500/20 hover:bg-orange-500/40 text-white p-2 rounded-full transition-all duration-300"
+              >
+                <X className="w-6 h-6" />
+              </button>
+              <img
+                src={enlargedImage}
+                alt="Enlarged testimonial image"
+                className="max-w-full max-h-full object-contain rounded-lg border-2 border-orange-500/50"
+                onClick={(e) => e.stopPropagation()}
+              />
+            </div>
+          </div>
+        )}
 
       </div>
     </section>

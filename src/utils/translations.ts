@@ -36,7 +36,7 @@ export const translations: Record<Language, Translations> = {
   en: {
     header: {
       slogan1: 'Rep your TechStack',
-      slogan2: 'The only Brand merging Code & Cloth.',
+      slogan2: 'Merch for Coders with AI & Guts',
       waitlist: 'Blacklist',
       contact: 'Contact'
     },

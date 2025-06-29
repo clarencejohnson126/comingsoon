@@ -51,7 +51,7 @@ const FeatureSection: React.FC = () => {
             system.features()
           </h2>
           <p className="text-xl text-orange-300 font-mono max-w-3xl mx-auto">
-            Built by developers, for developers. Every feature engineered for maximum impact.
+            More than merch—designed for people who make things happen, whatever their tools.
           </p>
         </div>
 
