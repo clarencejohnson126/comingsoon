@@ -73,8 +73,8 @@ const CurtainReveal: React.FC<CurtainRevealProps> = ({
         lastTouchY.current = touch.clientY;
       }
 
-      // Update scroll progress (0 to 1) - bidirectional with much slower speed
-      const newProgress = Math.max(0, Math.min(scrollProgress + (scrollDirection * 0.003), 1));
+      // Update scroll progress (0 to 1) - bidirectional with faster speed
+      const newProgress = Math.max(0, Math.min(scrollProgress + (scrollDirection * 0.008), 1));
       setScrollProgress(newProgress);
       scrollMotionValue.set(newProgress);
 
