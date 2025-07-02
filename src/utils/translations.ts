@@ -35,7 +35,7 @@ export interface Translations {
 export const translations: Record<Language, Translations> = {
   en: {
     header: {
-      slogan1: 'Rep your TechStack',
+      slogan1: 'Rep your Stack',
       slogan2: 'Merch for Coders with AI & Guts',
       waitlist: 'Blacklist',
       contact: 'Contact'

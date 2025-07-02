@@ -9,28 +9,28 @@ const TestimonialSection: React.FC = () => {
       quote: "Finally, a brand that speaks my language. Literally wearing my favorite algorithm with Rebelz AI right now.",
       author: "@PromptSamurai",
       role: "Full Stack Rebel",
-      avatar: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//Screenshot%202025-06-29%20at%2019.30.45.png",
+      avatar: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/Screenshot%202025-06-29%20at%2019.30.45.png?width=200&height=200&resize=cover&quality=85",
       platform: <Github className="w-4 h-4" />
     },
     {
       quote: "Streetwear for my inner AI. The Rebelz AI Neural Network hoodie literally reads my mind.",
       author: "@NerdModeOn",
       role: "AI Engineer",
-      avatar: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//Screenshot%202025-06-29%20at%2019.31.13.png",
+      avatar: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/Screenshot%202025-06-29%20at%2019.31.13.png?width=200&height=200&resize=cover&quality=85",
       platform: <Twitter className="w-4 h-4" />
     },
     {
       quote: "This isn't just clothing - it's a statement. Every Rebelz AI piece tells the story of digital rebellion.",
       author: "@CodeNinja42",
       role: "Blockchain Developer",
-      avatar: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//Screenshot%202025-06-29%20at%2019.31.26.png",
+      avatar: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/Screenshot%202025-06-29%20at%2019.31.26.png?width=200&height=200&resize=cover&quality=85",
       platform: <Linkedin className="w-4 h-4" />
     },
     {
       quote: "Been waiting for something like Rebelz AI forever. Fashion that actually understands tech culture.",
       author: "@ByteQueen",
       role: "DevOps Architect",
-      avatar: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//Screenshot%202025-06-29%20at%2019.30.58.png",
+      avatar: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/Screenshot%202025-06-29%20at%2019.30.58.png?width=200&height=200&resize=cover&quality=85",
       platform: <Github className="w-4 h-4" />
     }
   ];
@@ -64,6 +64,9 @@ const TestimonialSection: React.FC = () => {
                 <img
                   src={testimonial.avatar}
                   alt={testimonial.author}
+                  loading="lazy"
+                  width="48"
+                  height="48"
                   className="w-12 h-12 rounded-full border-2 border-orange-500/50 cursor-pointer hover:border-orange-500 transition-all duration-300 hover:scale-105"
                   onClick={() => setEnlargedImage(testimonial.avatar)}
                 />

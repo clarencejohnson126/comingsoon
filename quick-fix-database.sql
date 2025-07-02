@@ -21,7 +21,10 @@ CREATE TABLE IF NOT EXISTS blacklist_signups (
     email_workflow_status VARCHAR(50) DEFAULT 'pending',
     
     -- Add constraint for email format
-    CONSTRAINT email_format CHECK (email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$')
+    CONSTRAINT email_format CHECK (email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'),
+    
+    -- Add product_preference column
+    product_preference VARCHAR(100)
 );
 
 -- Create analytics_events table for tracking
@@ -39,6 +42,7 @@ CREATE INDEX IF NOT EXISTS idx_blacklist_signups_created_at ON blacklist_signups
 CREATE INDEX IF NOT EXISTS idx_blacklist_signups_email ON blacklist_signups(email);
 CREATE INDEX IF NOT EXISTS idx_analytics_events_type ON analytics_events(event_type);
 CREATE INDEX IF NOT EXISTS idx_analytics_events_created_at ON analytics_events(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_blacklist_signups_product_preference ON blacklist_signups(product_preference);
 
 -- Enable Row Level Security (RLS)
 ALTER TABLE blacklist_signups ENABLE ROW LEVEL SECURITY;
@@ -74,4 +78,10 @@ CREATE POLICY "Allow reading analytics" ON analytics_events
 ALTER PUBLICATION supabase_realtime ADD TABLE blacklist_signups;
 
 -- Success message
-SELECT 'Rebelz AI tables created successfully! 🚀' as message;
+DO $$
+BEGIN
+    RAISE NOTICE 'Database quick fixes applied successfully! 🚀';
+    RAISE NOTICE 'Added product_preference column to blacklist_signups table';
+    RAISE NOTICE 'Added indexes for better performance';
+    RAISE NOTICE 'RLS policies updated';
+END $$;

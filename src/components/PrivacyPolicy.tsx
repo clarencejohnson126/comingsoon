@@ -114,7 +114,7 @@ const PrivacyPolicy: React.FC = () => {
                   <p className="font-mono">
                     For privacy-related questions or requests, contact us at:
                     <br />
-                    <span className="text-orange-400">privacy@rebelz-ai.com</span>
+                    <span className="text-orange-400">thinkbig@rebelz-ai.com</span>
                   </p>
                 </div>
               </section>

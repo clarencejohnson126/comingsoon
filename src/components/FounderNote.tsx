@@ -22,8 +22,11 @@ const FounderNote: React.FC = () => {
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="flex-shrink-0">
                 <img
-                  src="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//out-2-1.png"
+                  src="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/out-2-1.png?width=400&height=400&resize=cover&quality=85"
                   alt="Clarence - Founder"
+                  loading="lazy"
+                  width="192"
+                  height="192"
                   className="w-48 h-48 rounded-full border-4 border-orange-500/50 cursor-pointer hover:border-orange-500 hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/30"
                   onClick={handleImageClick}
                   title="Click to view larger image"
@@ -81,7 +84,7 @@ const FounderNote: React.FC = () => {
             <X className="w-8 h-8" />
           </button>
           <img
-            src="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//out-2-1.png"
+            src="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/out-2-1.png"
             alt="Clarence - Founder (Full Size)"
             className="max-w-full max-h-screen rounded-2xl border-4 border-orange-500/50 shadow-2xl"
             onClick={(e) => e.stopPropagation()}

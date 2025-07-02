@@ -17,7 +17,7 @@ const ProductPreview: React.FC<ProductPreviewProps> = ({ onReserve }) => {
     {
       id: 1,
       name: "The Trifecta Hoodie",
-      preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//ChatGPT%20Image%20Jun%2026,%202025,%2012_36_02%20AM.png",
+      preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/ChatGPT%20Image%20Jun%2026,%202025,%2012_36_02%20AM.png?width=800&height=800&resize=contain&quality=80",
       description: "Embedded Code inside sleeve for retrieving community perks",
       price: "Blacklist = Priority",
       features: ["French Terry Fabric", "GSM 350 brushed", "Embroided Label Tag at bottom back \"First Mover Collection\"", "Limited Edition"]
@@ -25,7 +25,7 @@ const ProductPreview: React.FC<ProductPreviewProps> = ({ onReserve }) => {
     {
       id: 2,
       name: "Neural Network Oversized Hoodie",
-      preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//f87b2ace-87fa-471d-b112-4b7c4a21b067%20(1)%20(1).jpeg",
+      preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/f87b2ace-87fa-471d-b112-4b7c4a21b067%20(1)%20(1).jpeg?width=800&height=800&resize=contain&quality=80",
       description: "When your code thinks for itself",
       price: "Blacklist = Priority",
       features: ["360 GSM heavyweight cotton", "Hidden tech pocket", "nice glowy coral orange colour"]
@@ -33,7 +33,7 @@ const ProductPreview: React.FC<ProductPreviewProps> = ({ onReserve }) => {
     {
       id: 3,
       name: "Neural Network Oversized Hoodie #2",
-      preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//ff7a4706-0c0e-4b08-8df7-68e888ba4234.png",
+      preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/ff7a4706-0c0e-4b08-8df7-68e888ba4234.png?width=800&height=800&resize=contain&quality=80",
       description: "01001000 01101001 - Decode the message",
       price: "Blacklist = Priority",
       features: ["Premium French Terry Blend", "Binary code pattern", "Ribbed cuffs and hem", "Machine washable", "Unisex sizing"]
@@ -42,7 +42,7 @@ const ProductPreview: React.FC<ProductPreviewProps> = ({ onReserve }) => {
     {
       id: 4,
       name: "Fitted and Automated Tee",
-      preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//ChatGPT%20Image%20Jun%2026,%202025,%2012_49_38%20AM.png",
+      preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/ChatGPT%20Image%20Jun%2026,%202025,%2012_49_38%20AM.png?width=800&height=800&resize=contain&quality=80",
       description: "Obey nobody. Automate everything",
       price: "Blacklist = Priority",
       features: ["Custom Code", "Organic Cotton", "Embroided Label tag at bottom left front \"Verified Vibe Coder\""]
@@ -50,7 +50,7 @@ const ProductPreview: React.FC<ProductPreviewProps> = ({ onReserve }) => {
     {
       id: 5,
       name: "Digital Focus Workspace Tee",
-      preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//Arbeiten%20im%20digitalen%20Fokus.png",
+      preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/Arbeiten%20im%20digitalen%20Fokus.png?width=800&height=800&resize=contain&quality=80",
       description: "Working in digital focus - where innovation happens",
       price: "Blacklist = Priority",
       features: ["Fitted Streched", "German-inspired design", "Anti-static fabric", "Breathable mesh panels", "Rebelz AI Logo"]
@@ -58,7 +58,7 @@ const ProductPreview: React.FC<ProductPreviewProps> = ({ onReserve }) => {
     {
       id: 6,
       name: "AI Generated Classic",
-      preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//ChatGPT%20Image%20Jun%2026,%202025,%2012_36_33%20AM.png",
+      preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/ChatGPT%20Image%20Jun%2026,%202025,%2012_36_33%20AM.png?width=800&height=800&resize=contain&quality=80",
       description: "Designed by algorithms, worn by Rebelz",
       price: "Blacklist = Priority",
       features: ["AI-optimized color scheme", "Sustainable fabric blend", "Seamless construction", "Quick-dry technology", "Future-proof design"]
@@ -66,7 +66,7 @@ const ProductPreview: React.FC<ProductPreviewProps> = ({ onReserve }) => {
     {
       id: 7,
       name: "Runtime Revolution Tee",
-      preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//08cf55f5-ae3b-42a8-aad9-e67a90207149.png",
+      preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/08cf55f5-ae3b-42a8-aad9-e67a90207149.png?width=800&height=800&resize=contain&quality=80",
       description: "Executes flawlessly in any environment",
       price: "Blacklist = Priority",
       features: ["Real cryptic code printed on the back", "Exclusive REBELZ AI protocol design", "Premium, durable comfort", "Only for true Vibe Coders"]
@@ -75,7 +75,7 @@ const ProductPreview: React.FC<ProductPreviewProps> = ({ onReserve }) => {
     {
       id: 8,
       name: "Code Repository Varsity",
-      preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/images//Screenshot%202025-06-28%20at%2002.22.18.png",
+      preview: "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/images/Screenshot%202025-06-28%20at%2002.22.18.png?width=800&height=800&resize=contain&quality=80",
       description: "git commit -m 'added style to wardrobe'",
       price: "Blacklist = Priority",
       features: ["Snapback cap with bold REBELZ AI hacker embroidery", "Rugged, branch-resistant fabric for daily grind", "Clean, conflict-free style—no merge issues", "Open source inspired, made for underground coders"]
@@ -87,6 +87,14 @@ const ProductPreview: React.FC<ProductPreviewProps> = ({ onReserve }) => {
     setImageLoaded(false);
     setIsLoading(true);
   }, [currentSlide]);
+
+  // Preload first 3 product images for faster navigation
+  useEffect(() => {
+    products.slice(0, 3).forEach(product => {
+      const img = new Image();
+      img.src = product.preview;
+    });
+  }, []);
 
   const handleImageLoad = () => {
     setImageLoaded(true);
@@ -166,6 +174,10 @@ const ProductPreview: React.FC<ProductPreviewProps> = ({ onReserve }) => {
                 <img
                   src={products[currentSlide].preview}
                   alt={products[currentSlide].name}
+                  loading={currentSlide === 0 ? "eager" : "lazy"}
+                  fetchPriority={currentSlide === 0 ? "high" : "low"}
+                  width="800"
+                  height="800"
                   onLoad={handleImageLoad}
                   onError={handleImageError}
                   className="w-full h-64 sm:h-80 md:h-96 lg:h-[500px] xl:h-[600px] object-cover rounded-xl sm:rounded-2xl border-2 border-orange-500/50 transition-all duration-300 group-hover:brightness-75"

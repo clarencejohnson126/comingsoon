@@ -18,6 +18,7 @@ function App() {
   const [blacklistCount, setBlacklistCount] = useState(847);
   const [typewriterText, setTypewriterText] = useState('');
   const [email, setEmail] = useState('');
+  const [productPreference, setProductPreference] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [showEmailInput, setShowEmailInput] = useState(false);
@@ -28,6 +29,17 @@ function App() {
   
   const t = useTranslation(currentLanguage);
   const fullText = t.hero.typewriterText;
+
+  // Product options for blacklist preference
+  const productOptions = [
+    { value: '', label: 'Select your favorite piece...' },
+    { value: 'hoodie-orange', label: 'Hoodie Orange' },
+    { value: 'hoodie-black', label: 'Hoodie Black' },
+    { value: 'tshirt-hacker', label: 'T-Shirt Hacker' },
+    { value: 'tshirt-obey-automate', label: 'T-Shirt "Obey nobody. Automate everything"' },
+    { value: 'tshirt-cryptic-coder', label: 'T-Shirt Cryptic Coder' },
+    { value: 'rebelz-ai-cap', label: 'Rebelz AI Cap' }
+  ];
 
   // Typewriter effect with continuous loop
   useEffect(() => {
@@ -92,6 +104,8 @@ function App() {
 
   const handleBlacklistClick = () => {
     setShowEmailPopup(true);
+    setEmail('');
+    setProductPreference('');
     supabaseHelpers.trackEvent('blacklist_header_click', { 
       timestamp: new Date().toISOString()
     });
@@ -127,6 +141,7 @@ function App() {
 
       // Add to blacklist with email workflow
       const result = await supabaseHelpers.addToBlacklist(email, {
+        product_preference: productPreference || undefined,
         user_agent: navigator.userAgent,
         referrer: document.referrer
       });
@@ -149,6 +164,7 @@ function App() {
         
         setMessage(successMessage);
         setEmail('');
+        setProductPreference('');
         setShowEmailInput(false);
         
         // Track successful signup with email workflow status
@@ -199,9 +215,18 @@ function App() {
     });
   };
 
-  // Hero images for curtain reveal - responsive
-  const heroImage = "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/ChatGPT%20Image%20Jun%2022,%202025,%2009_57_27%20PM.png";
-  const mobileHeroImage = "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/image%20(2).jpeg";
+  // Hero images for curtain reveal - responsive (optimized)
+  const heroImage = "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/ChatGPT%20Image%20Jun%2022,%202025,%2009_57_27%20PM.png?width=1920&height=1080&resize=cover&quality=85";
+  const mobileHeroImage = "https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/image%20(2).jpeg?width=800&height=1200&resize=cover&quality=85";
+
+  // Preload critical images on component mount
+  useEffect(() => {
+    const preloadImages = [heroImage, mobileHeroImage];
+    preloadImages.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, [heroImage, mobileHeroImage]);
 
   return (
     <>
@@ -341,6 +366,21 @@ function App() {
                 />
               </div>
 
+              <div>
+                <select
+                  value={productPreference}
+                  onChange={(e) => setProductPreference(e.target.value)}
+                  className="w-full px-4 py-3 bg-black/50 border border-orange-500/50 rounded-lg text-white font-mono text-base focus:border-orange-500 focus:outline-none transition-colors"
+                  disabled={isLoading}
+                >
+                  {productOptions.map((option) => (
+                    <option key={option.value} value={option.value} className="bg-black text-white">
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               <button
                 type="submit"
                 disabled={isLoading}
@@ -392,11 +432,15 @@ function App() {
           <picture>
             <source 
               media="(min-width: 768px)" 
-              srcSet="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//ChatGPT%20Image%20Jun%2022,%202025,%2009_57_27%20PM.png"
+              srcSet="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/ChatGPT%20Image%20Jun%2022,%202025,%2009_57_27%20PM.png?width=1920&height=1080&resize=cover&quality=85"
             />
             <img
-              src="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//ChatGPT%20Image%20Jun%2022,%202025,%2009_57_27%20PM.png"
+              src="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/ChatGPT%20Image%20Jun%2022,%202025,%2009_57_27%20PM.png?width=1920&height=1080&resize=cover&quality=85"
               alt="Rebelz AI Hero"
+              loading="eager"
+              fetchPriority="high"
+              width="1920"
+              height="1080"
               className="w-full h-full object-cover opacity-95 brightness-110"
             />
           </picture>
@@ -437,6 +481,18 @@ function App() {
                     disabled={isLoading}
                     autoFocus
                   />
+                  <select
+                    value={productPreference}
+                    onChange={(e) => setProductPreference(e.target.value)}
+                    className="w-full px-4 py-3 bg-black/50 border border-orange-500/50 rounded-lg text-white font-mono text-base focus:border-orange-500 focus:outline-none"
+                    disabled={isLoading}
+                  >
+                    {productOptions.map((option) => (
+                      <option key={option.value} value={option.value} className="bg-black text-white">
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
                   <div className="flex gap-2">
                     <button
                       type="submit"
@@ -495,7 +551,7 @@ function App() {
         {/* Mobile: Title and Slogans */}
         <div className="text-center px-4 mb-4">
           <h1 className="text-xl font-bold shimmer-orange mb-2 leading-tight">
-            Rep your TechStack
+            Rep your Stack
           </h1>
           <p className="text-orange-300 text-sm leading-relaxed mb-4">
             Merch for Coders with AI & Guts
@@ -512,11 +568,15 @@ function App() {
           <picture>
             <source 
               media="(max-width: 767px)" 
-              srcSet="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//image%20(2).jpeg"
+              srcSet="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/image%20(2).jpeg?width=800&height=1200&resize=cover&quality=85"
             />
             <img
-              src="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test//image%20(2).jpeg"
+              src="https://eoahpwciwttfavzpqfnz.supabase.co/storage/v1/object/public/test/image%20(2).jpeg?width=800&height=1200&resize=cover&quality=85"
               alt="Rebelz AI Hero Mobile"
+              loading="eager"
+              fetchPriority="high"
+              width="800"
+              height="1200"
               className="w-full h-full object-cover"
             />
           </picture>
@@ -545,6 +605,18 @@ function App() {
                   disabled={isLoading}
                   autoFocus
                 />
+                <select
+                  value={productPreference}
+                  onChange={(e) => setProductPreference(e.target.value)}
+                  className="w-full px-3 py-2 bg-black/50 border border-orange-500/50 rounded-lg text-white font-mono text-sm focus:border-orange-500 focus:outline-none"
+                  disabled={isLoading}
+                >
+                  {productOptions.map((option) => (
+                    <option key={option.value} value={option.value} className="bg-black text-white">
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
                 <div className="flex gap-2">
                   <button
                     type="submit"
@@ -682,7 +754,7 @@ function App() {
             <div className="flex items-center">
               <div>
                 <p className="text-orange-500 font-bold text-lg shimmer-orange">Rebelz AI Apparel</p>
-                <p className="text-gray-400 text-sm font-mono">Rep your TechStack</p>
+                <p className="text-gray-400 text-sm font-mono">Rep your Stack</p>
               </div>
             </div>
             

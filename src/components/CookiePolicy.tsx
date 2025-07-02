@@ -170,7 +170,7 @@ const CookiePolicy: React.FC = () => {
                   <p className="font-mono">
                     For questions about our cookie usage, contact us at:
                     <br />
-                    <span className="text-orange-400">privacy@rebelz-ai.com</span>
+                    <span className="text-orange-400">thinkbig@rebelz-ai.com</span>
                   </p>
                 </div>
               </section>

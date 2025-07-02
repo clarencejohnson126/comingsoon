@@ -131,12 +131,20 @@ const CurtainReveal: React.FC<CurtainRevealProps> = ({
         <img
           src={mobileHeroImage}
           alt="Rebelz AI Mobile Hero"
+          loading="eager"
+          fetchPriority="high"
+          width="800"
+          height="1200"
           className="block md:hidden w-full h-full object-cover"
         />
         {/* Desktop Hero Image */}
         <img
           src={heroImage}
           alt="Rebelz AI Desktop Hero"
+          loading="eager"
+          fetchPriority="high"
+          width="1920"
+          height="1080"
           className="hidden md:block w-full h-full object-cover"
         />
       </div>
@@ -170,7 +178,7 @@ const CurtainReveal: React.FC<CurtainRevealProps> = ({
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            Rep your TechStack
+            Rep your Stack
           </motion.h1>
           
           <motion.p 
@@ -292,7 +300,7 @@ const CurtainReveal: React.FC<CurtainRevealProps> = ({
              animate={{ y: 0, opacity: 1 }}
              transition={{ delay: 0.3, duration: 0.8 }}
            >
-             Rep your TechStack
+             Rep your Stack
            </motion.h1>
            
            <motion.p 

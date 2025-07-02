@@ -8,6 +8,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE TABLE IF NOT EXISTS blacklist_signups (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     email VARCHAR(255) NOT NULL UNIQUE,
+    product_preference VARCHAR(100),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     ip_address INET,
     user_agent TEXT,
@@ -37,6 +38,7 @@ CREATE TABLE IF NOT EXISTS analytics_events (
 -- Create indexes for better performance
 CREATE INDEX IF NOT EXISTS idx_blacklist_signups_created_at ON blacklist_signups(created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_blacklist_signups_email ON blacklist_signups(email);
+CREATE INDEX IF NOT EXISTS idx_blacklist_signups_product_preference ON blacklist_signups(product_preference);
 CREATE INDEX IF NOT EXISTS idx_analytics_events_type ON analytics_events(event_type);
 CREATE INDEX IF NOT EXISTS idx_analytics_events_created_at ON analytics_events(created_at DESC);
 

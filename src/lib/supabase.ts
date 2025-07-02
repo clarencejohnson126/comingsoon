@@ -11,6 +11,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 export interface BlacklistSignup {
   id?: string
   email: string
+  product_preference?: string
   created_at?: string
   ip_address?: string
   user_agent?: string
@@ -42,6 +43,7 @@ export const supabaseHelpers = {
         .insert([
           {
             email,
+            product_preference: metadata?.product_preference,
             ip_address: metadata?.ip_address,
             user_agent: metadata?.user_agent,
             referrer: metadata?.referrer,

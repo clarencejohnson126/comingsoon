@@ -131,7 +131,7 @@ const TermsOfService: React.FC = () => {
                   <p className="font-mono">
                     Questions about these Terms of Service should be sent to:
                     <br />
-                    <span className="text-orange-400">legal@rebelz-ai.com</span>
+                    <span className="text-orange-400">thinkbig@rebelz-ai.com</span>
                   </p>
                 </div>
               </section>
